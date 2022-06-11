@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
         android:layout_marginTop="12dp"
+        android:inputType="textWebPassword"
         android:layout_marginEnd="22dp"
         app:layout_constraintTop_toBottomOf="@id/passwordReg" />
 
@@ -67,35 +68,37 @@
         app:layout_constraintTop_toBottomOf="@id/passwordEtReg" />
 
     <TextView
+        android:id="@+id/forgotPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="6sp"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="52dp"
         android:clickable="true"
         android:focusable="true"
         android:text="@string/pass"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@id/btnRegistrationReg"
-        app:layout_constraintTop_toBottomOf="@id/passwordEtReg" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/check" />
 
     <Button
         android:id="@+id/btnVhodReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="52dp"
         android:text="@string/voity"
-        app:layout_constraintEnd_toEndOf="@id/passwordEtReg"
+        app:layout_constraintStart_toEndOf="@id/check"
         app:layout_constraintTop_toBottomOf="@id/passwordEtReg" />
 
     <Button
         android:id="@+id/btnRegistrationReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginTop="102dp"
+        android:layout_marginStart="38dp"
         android:text="@string/registr"
-        app:layout_constraintEnd_toStartOf="@id/btnVhodReg"
+        app:layout_constraintStart_toEndOf="@id/forgotPass"
         app:layout_constraintTop_toBottomOf="@id/passwordEtReg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

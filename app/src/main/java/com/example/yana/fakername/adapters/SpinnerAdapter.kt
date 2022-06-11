@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.example.yana.fakername.dataClass.Countries
-import com.example.yana.fakername.dataClass.ListCountries
 import com.example.yana.fakername.databinding.ItemSpinnerBinding
 
 class SpinnerAdapter (context: Context, resId: Int, val array: Array<Countries>):

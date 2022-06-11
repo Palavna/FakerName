@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.yana.fakername.dataClass.Countries
-import com.example.yana.fakername.dataClass.ListCountries
 import com.example.yana.fakername.repository.FakerRepository
 import kotlinx.coroutines.launch
 

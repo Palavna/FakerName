@@ -13,10 +13,67 @@
         <action
             android:id="@+id/action_addTextFragment_to_dataAddFragment2"
             app:destination="@id/dataAddFragment2" />
+        <action
+            android:id="@+id/action_addTextFragment_to_registerNameFragment2"
+            app:destination="@id/registerNameFragment" />
     </fragment>
     <fragment
         android:id="@+id/dataAddFragment2"
         android:name="com.example.yana.fakername.fragments.DataAddFragment"
         android:label="DataAddFragment"
-        tools:layout="@layout/fragment_data_add"/>
+        tools:layout="@layout/fragment_data_add">
+        <action
+            android:id="@+id/action_dataAddFragment2_to_privateCabinetFragment2"
+            app:destination="@id/privateCabinetFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        tools:layout="@layout/fragment_registration"
+        android:name="com.example.yana.fakername.fragments.RegistrationFragment"
+        android:label="RegistrationFragment" >
+        <action
+            android:id="@+id/action_registrationFragment_to_registerNameFragment"
+            app:destination="@id/registerNameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerNameFragment"
+        tools:layout="@layout/fragment_register_name"
+        android:name="com.example.yana.fakername.fragments.RegisterNameFragment"
+        android:label="RegisterNameFragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        tools:layout="@layout/fragment_about"
+        android:name="com.example.yana.fakername.fragments.AboutFragment"
+        android:label="AboutFragment" >
+        <action
+            android:id="@+id/action_aboutFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_aboutFragment_to_editCommentFragment"
+            app:destination="@id/editCommentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        tools:layout="@layout/fragment_details"
+        android:name="com.example.yana.fakername.fragments.DetailsFragment"
+        android:label="DetailsFragment" />
+    <fragment
+        android:id="@+id/privateCabinetFragment2"
+        tools:layout="@layout/fragment_private_cabinet"
+        android:name="com.example.yana.fakername.fragments.PrivateCabinetFragment"
+        android:label="PrivateCabinetFragment" />
+    <fragment
+        android:id="@+id/editCommentFragment"
+        tools:layout="@layout/fragment_edit_comment"
+        android:name="com.example.yana.fakername.fragments.EditCommentFragment"
+        android:label="EditCommentFragment" />
+    <fragment
+        android:id="@+id/mainFragment"
+        tools:layout="@layout/fragment_main"
+        android:name="com.example.yana.fakername.fragments.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
 </navigation>

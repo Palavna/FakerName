@@ -12,5 +12,3 @@ data class Countries (
     val created_at: String,
     val updated_at: String
         )
-
-data class ListCountries(val list: List<Countries>)

@@ -1,7 +1,6 @@
 package com.example.yana.fakername.network
 
 import com.example.yana.fakername.dataClass.Countries
-import com.example.yana.fakername.dataClass.ListCountries
 
 interface FakerIteractor {
 

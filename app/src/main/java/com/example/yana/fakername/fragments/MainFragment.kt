@@ -5,17 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.example.yana.fakername.R
 import com.example.yana.fakername.adapters.SpinnerAdapter
 import com.example.yana.fakername.databinding.FragmentMainBinding
 import com.example.yana.fakername.fragmentsViewModel.MainViewModel
+import com.example.yana.fakername.ui.FragmentCallBack
+import com.example.yana.fakername.ui.MainActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment: Fragment(R.layout.fragment_main) {
 
     private lateinit var binding: FragmentMainBinding
     private val viewModel: MainViewModel by viewModel()
+    private var callBack: FragmentCallBack? = null
 
 
     override fun onCreateView(
@@ -35,5 +37,9 @@ class MainFragment: Fragment(R.layout.fragment_main) {
 
             binding.spinner.adapter = adapter
         })
+
+        binding.btnSearch.setOnClickListener {
+
+        }
     }
 }

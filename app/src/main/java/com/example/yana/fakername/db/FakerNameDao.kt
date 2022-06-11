@@ -5,7 +5,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.yana.fakername.dataClass.Countries
-import com.example.yana.fakername.dataClass.ListCountries
+import com.example.yana.fakername.dataClass.Documents
+import com.example.yana.fakername.dataClass.DocumentsPage
 
 @Dao
 interface FakerNameDao {
@@ -18,4 +19,13 @@ interface FakerNameDao {
 
     @Query("DELETE FROM countries")
     fun deleteAllLoadCountries()
+
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    fun insertDocuments(documents: Documents)
+//
+//    @Query("SELECT * FROM documentspage")
+//    fun getDocuments(): Documents
+//
+//    @Query("DELETE FROM documentspage")
+//    fun deleteAllDocuments()
 }

@@ -2,12 +2,13 @@ package com.example.yana.fakername.di
 
 import androidx.room.Room
 import com.example.yana.fakername.db.FakerAppDataBase
-import com.example.yana.fakername.network.FakerIteractor
-import com.example.yana.fakername.network.FakerIteractorImpl
-import com.example.yana.fakername.network.RetrofitFaker
-import com.example.yana.fakername.repository.FakerRepository
-import com.example.yana.fakername.repository.FakerRepositoryImpl
-import com.example.yana.fakername.fragmentsViewModel.MainViewModel
+import com.example.yana.fakername.fragmentsViewModel.*
+import com.example.yana.fakername.iteractor.CreateCommentIteractor
+import com.example.yana.fakername.iteractor.CreateCommentIteractorImpl
+import com.example.yana.fakername.iteractor.ProfileCabinetIteractor
+import com.example.yana.fakername.iteractor.ProfileCabinetIteractorImpl
+import com.example.yana.fakername.network.*
+import com.example.yana.fakername.repository.*
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
@@ -33,12 +34,27 @@ val networkModule = module {
 }
 val viewModelModule = module {
     viewModel { MainViewModel(get()) }
+    viewModel { RegistrationViewModel(get(), get()) }
+    viewModel { DataAddViewModel(get(), get()) }
+    viewModel { PrivateCabinetViewModel(get(), get(),get()) }
+    viewModel { AddTextViewModel(get(), get()) }
+    viewModel { RegisterNameViewModel(get(), get()) }
+    viewModel { AboutViewModel(get(), get()) }
+
 }
 val iteractorModules = module {
     single<FakerIteractor> { FakerIteractorImpl(get()) }
+    single<AuthIteractor> { AuthIteractorImpl(get()) }
+    single<DocumentIteractor> { DocumentIteractorImpl(get()) }
+    single<ProfileCabinetIteractor> { ProfileCabinetIteractorImpl(get()) }
+    single<CreateCommentIteractor> { CreateCommentIteractorImpl(get()) }
 }
 val repositoryModel = module {
     single <FakerRepository> { FakerRepositoryImpl(get(), get()) }
+    single <AuthRepository> { AuthRepositoryImpl(get()) }
+    single <DocumentRepository> { DocumentRepositoryImpl(get(), get()) }
+    single <ProfileCabinetRepository> { ProfileCabinetRepositoryImpl(get()) }
+    single <CreateCommentRepository> { CreateCommentRepositoryImpl(get()) }
 }
 val dbModule = module {
     single { Room.databaseBuilder(get(), FakerAppDataBase::class.java,"fakerName")

@@ -14,6 +14,6 @@ class ApplicationFakerName: Application() {
             androidContext(this@ApplicationFakerName)
             fakerModules
         }
-//        SharedPreferenceFaker.saveKey()
+        SharedPreferenceFaker.init(this)
     }
 }

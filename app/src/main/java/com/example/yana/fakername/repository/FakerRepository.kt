@@ -1,7 +1,6 @@
 package com.example.yana.fakername.repository
 
 import com.example.yana.fakername.dataClass.Countries
-import com.example.yana.fakername.dataClass.ListCountries
 import com.example.yana.fakername.db.FakerNameDao
 import com.example.yana.fakername.network.FakerIteractor
 

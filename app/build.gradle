@@ -61,4 +61,7 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:2.4.2"
+
+    implementation "com.itkacher.okhttpprofiler:okhttpprofiler:1.0.7"
+    implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
 }
