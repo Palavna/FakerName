@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     android:background="#B0B0B3">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bgmasthead"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,6 +47,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="26dp"
+        android:imeOptions="actionSearch"
+        android:lines="2"
+        android:inputType="text"
         android:hint="@string/namber"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

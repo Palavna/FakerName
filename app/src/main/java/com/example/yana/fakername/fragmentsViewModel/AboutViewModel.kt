@@ -1,6 +1,5 @@
 package com.example.yana.fakername.fragmentsViewModel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,7 +12,6 @@ import com.example.yana.fakername.network.DocumentIteractor
 import com.example.yana.fakername.repository.DocumentRepository
 import com.example.yana.fakername.utils.DocumentsSource
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
 
 class AboutViewModel(val repository: DocumentRepository, val iteractor: DocumentIteractor) : ViewModel() {
 

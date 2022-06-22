@@ -31,7 +31,6 @@ class PrivateCabinetViewModel(private val authRepos: AuthRepository, private val
 
     init {
         profile()
-        profileUser(name = String())
     }
 
     fun logout(){

@@ -1,16 +1,23 @@
 package com.example.yana.fakername.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.yana.fakername.R
 import com.example.yana.fakername.adapters.SpinnerAdapter
+import com.example.yana.fakername.dataClass.Countries
 import com.example.yana.fakername.databinding.FragmentMainBinding
 import com.example.yana.fakername.fragmentsViewModel.MainViewModel
 import com.example.yana.fakername.ui.FragmentCallBack
 import com.example.yana.fakername.ui.MainActivity
+import com.example.yana.fakername.utils.hideKeyboard
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment: Fragment(R.layout.fragment_main) {
@@ -31,15 +38,64 @@ class MainFragment: Fragment(R.layout.fragment_main) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupListeners()
 
         viewModel.countries.observe(viewLifecycleOwner, {
             val adapter = SpinnerAdapter(requireContext(), R.layout.item_spinner, it?.toTypedArray() ?: emptyArray())
 
             binding.spinner.adapter = adapter
         })
-
-        binding.btnSearch.setOnClickListener {
-
-        }
+        doSomething(binding.etFaker)
     }
+
+    private fun doSomething(search: EditText) {
+        search.setOnEditorActionListener(TextView.OnEditorActionListener{ _, actionId, _ ->
+
+            if (actionId == EditorInfo.IME_ACTION_GO) {
+                if(search.text.toString() == "geeksforgeeks"){
+                    Toast.makeText(requireContext(), "Welcome to GFG", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(requireContext(), "Invalid Input", Toast.LENGTH_LONG).show()
+                }
+
+                return@OnEditorActionListener true
+            }
+            false
+        })
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    fun setupListeners(){
+        binding.btnSearch.setOnClickListener {
+            if (isMainValid()){
+                (requireActivity() as MainActivity).changeFragment(DetailsFragment.create(binding.etFaker.text.toString(),
+                    (binding.spinner.selectedItem as? Countries)?.id ?: -1 ), true)
+            }
+        }
+
+        binding.spinner.setOnTouchListener { _, _ ->
+            hideKeyboard()
+            return@setOnTouchListener false }
+    }
+
+    fun isMainValid(): Boolean{
+        var isValid = true
+        var missiedFileds = mutableListOf<String>()
+        if ((binding.spinner.selectedItem as? Countries)?.id == -1) {
+            missiedFileds.add("выберите страну")
+            isValid = false
+        }
+        if (binding.etFaker.text.toString().isEmpty())  {
+            binding.etFaker.error = "введите ПИН"
+            missiedFileds.add("введите ПИН")
+            isValid = false
+        }
+        if (!isValid){
+            val text = resources.getQuantityString(R.plurals.empty_field_msg, missiedFileds.size)
+                .plus(missiedFileds.joinToString(separator = ", "))
+            Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()
+        }
+        return isValid
+    }
+
 }

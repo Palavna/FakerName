@@ -3,10 +3,7 @@ package com.example.yana.fakername.di
 import androidx.room.Room
 import com.example.yana.fakername.db.FakerAppDataBase
 import com.example.yana.fakername.fragmentsViewModel.*
-import com.example.yana.fakername.iteractor.CreateCommentIteractor
-import com.example.yana.fakername.iteractor.CreateCommentIteractorImpl
-import com.example.yana.fakername.iteractor.ProfileCabinetIteractor
-import com.example.yana.fakername.iteractor.ProfileCabinetIteractorImpl
+import com.example.yana.fakername.iteractor.*
 import com.example.yana.fakername.network.*
 import com.example.yana.fakername.repository.*
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -33,13 +30,14 @@ val networkModule = module {
     }
 }
 val viewModelModule = module {
-    viewModel { MainViewModel(get()) }
+    viewModel { MainViewModel(get(), get()) }
     viewModel { RegistrationViewModel(get(), get()) }
-    viewModel { DataAddViewModel(get(), get()) }
+    viewModel { DataAddViewModel(get(), get(), get()) }
     viewModel { PrivateCabinetViewModel(get(), get(),get()) }
     viewModel { AddTextViewModel(get(), get()) }
     viewModel { RegisterNameViewModel(get(), get()) }
     viewModel { AboutViewModel(get(), get()) }
+    viewModel { DetailsViewModel(get(), get()) }
 
 }
 val iteractorModules = module {
@@ -48,6 +46,7 @@ val iteractorModules = module {
     single<DocumentIteractor> { DocumentIteractorImpl(get()) }
     single<ProfileCabinetIteractor> { ProfileCabinetIteractorImpl(get()) }
     single<CreateCommentIteractor> { CreateCommentIteractorImpl(get()) }
+    single<SearchIteractor> { SearchIteractorImpl(get()) }
 }
 val repositoryModel = module {
     single <FakerRepository> { FakerRepositoryImpl(get(), get()) }
@@ -55,6 +54,7 @@ val repositoryModel = module {
     single <DocumentRepository> { DocumentRepositoryImpl(get(), get()) }
     single <ProfileCabinetRepository> { ProfileCabinetRepositoryImpl(get()) }
     single <CreateCommentRepository> { CreateCommentRepositoryImpl(get()) }
+    single <SearchRepository> { SearchRepositoryImpl(get()) }
 }
 val dbModule = module {
     single { Room.databaseBuilder(get(), FakerAppDataBase::class.java,"fakerName")

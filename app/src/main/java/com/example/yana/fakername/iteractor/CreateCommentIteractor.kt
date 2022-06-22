@@ -13,9 +13,7 @@ interface CreateCommentIteractor {
 
 class CreateCommentIteractorImpl(private val network: FakerService): CreateCommentIteractor{
     override suspend fun createComment(): CreateComment? {
-        val comment = MultipartBody.Builder()
-            .addPart(MultipartBody.Part.createFormData("", "" ))
-        return network.createComment(1, false, "")
+        return network.createComment(inn = 1, documentId = 9, isPositive = 1, text = "dfghj")
     }
 
 }

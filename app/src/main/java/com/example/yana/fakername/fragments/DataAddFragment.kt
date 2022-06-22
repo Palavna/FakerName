@@ -2,18 +2,19 @@ package com.example.yana.fakername.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.navArgs
 import com.example.yana.fakername.R
 import com.example.yana.fakername.adapters.SpinnerAdapter
+import com.example.yana.fakername.dataClass.Countries
 import com.example.yana.fakername.databinding.FragmentDataAddBinding
 import com.example.yana.fakername.fragmentsViewModel.DataAddViewModel
 import com.example.yana.fakername.ui.FragmentCallBack
+import com.example.yana.fakername.ui.MainActivity
+import com.example.yana.fakername.utils.cleanLaunchActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DataAddFragment: Fragment() {
@@ -33,6 +34,9 @@ class DataAddFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.eventAuth.observe(viewLifecycleOwner, {
+            if (it)callBack?.openProfile()
+        })
 
         viewModel.countries.observe(viewLifecycleOwner, {
             val adapter = SpinnerAdapter(requireContext(), R.layout.item_spinner, it?.toTypedArray() ?: emptyArray())
@@ -46,22 +50,43 @@ class DataAddFragment: Fragment() {
 
     fun setupListeners(){
         binding.btnSend.setOnClickListener {
-            isInnValid(inn = String())
-           callBack?.openProfile()
-            viewModel.createComment()
-
+            if (isInnValid()){
+                viewModel.createDocument(
+                    (binding.spinnerAdd.selectedItem as Countries).id,
+                    binding.etAddData.text.toString(),
+                    binding.etAddText.text.toString(),
+                    binding.positive.isChecked)
+            }
         }
     }
 
-    fun isInnValid(inn: String): Boolean {
-        if (inn.isEmpty()) {
-            binding.etAddData.error = "заполните это поле"
-            return false
+    fun isInnValid(): Boolean {
+        var isValid = true
+        var missiedFileds = mutableListOf<String>()
+        if ((binding.spinnerAdd.selectedItem as? Countries)?.id == -1) {
+            missiedFileds.add("выберите страну")
+            isValid = false
         }
-        val isValid = Patterns.EMAIL_ADDRESS.matcher(inn).matches()
+        if (binding.etAddData.text.toString().isEmpty())  {
+            binding.etAddData.error = "введите ПИН"
+            missiedFileds.add("введите ПИН")
+            isValid = false
+        }
+        if (binding.etAddText.text.toString().length<10) {
+            binding.etAddText.error = "оставьте комментарий"
+            missiedFileds.add("оставьте комментарий")
+            isValid = false
+        }
+        if (!binding.positive.isChecked && !binding.negative.isChecked){
+            missiedFileds.add("radio button")
+            isValid = false
+        }
         if (!isValid){
-            binding.etAddText.error = "добавьте комментарий"
+            val text = resources.getQuantityString(R.plurals.empty_field_msg, missiedFileds.size)
+                .plus(missiedFileds.joinToString(separator = ", "))
+            Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()
         }
+
         return isValid
     }
 

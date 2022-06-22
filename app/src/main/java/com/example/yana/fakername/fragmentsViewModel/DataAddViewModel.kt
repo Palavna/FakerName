@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.yana.fakername.dataClass.Countries
-import com.example.yana.fakername.prefs.SharedPreferenceFaker
 import com.example.yana.fakername.repository.CreateCommentRepository
+import com.example.yana.fakername.repository.DocumentRepository
 import com.example.yana.fakername.repository.FakerRepository
 import com.example.yana.fakername.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
 
-class DataAddViewModel(val repository: FakerRepository, val reposCom: CreateCommentRepository): ViewModel() {
+class DataAddViewModel(val repository: FakerRepository, val reposCom: CreateCommentRepository, val reposDoc: DocumentRepository): ViewModel() {
 
     init {
         loadCountriesId()
@@ -38,12 +38,22 @@ class DataAddViewModel(val repository: FakerRepository, val reposCom: CreateComm
         viewModelScope.launch {
             kotlin.runCatching {
                 val createCom = reposCom.createComment()
-                val createC = reposCom.createComment()
-                SharedPreferenceFaker.id = createC?.id ?: -1
                 eventAuth.postValue(createCom != null)
                 Log.d("dfghdfgh", "fghjfghjfg")
             }.onFailure {
-                Log.d("dfghdfgh", it.localizedMessage)
+                Log.d("dfghdfgh", "fghjfghjfg")
+            }
+        }
+    }
+
+    fun createDocument(countryId: Int, passport: String, comment: String, positive: Boolean) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                val createCom = reposDoc.createDocument(countryId, passport, comment,positive)
+                eventAuth.postValue(createCom != null)
+                Log.d("dfghdfgh", "fghjfghjfg")
+            }.onFailure {
+                Log.d("dfghdfgh", "fghjfghjfg")
             }
         }
     }

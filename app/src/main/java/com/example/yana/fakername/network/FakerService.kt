@@ -37,12 +37,39 @@ interface FakerService {
         @Body model: Map<String, String>
     ): UpdateName?
 
-    @Multipart
+    @FormUrlEncoded
     @POST("comments")
     suspend fun createComment(
-        @Part inn: Int,
-        @Part is_positive: Boolean,
-        @Part text: String
+        @Field("document_id") documentId: Int,
+        @Field("inn") inn: Int,
+        @Field("is_positive") isPositive: Int,
+        @Field("text") text: String
     ): CreateComment?
+
+    @FormUrlEncoded
+    @POST("documents")
+    suspend fun createDocument(
+        @Field("country_id") countryId: Int,
+        @Field("inn") inn: String,
+        @Field("is_positive") isPositive: Int,
+        @Field("text") text: String
+    ): CreateDocument?
+
+    @GET("search")
+    suspend fun search(
+        @Query("text") text: String,
+        @Query("page") page: Int,
+        @Query("country_id") country_id: Int?
+    ): Search?
+
+    @GET("search")
+    suspend fun searchUser(
+        @Query("text") text: String,
+        @Query("page") page: Int,
+        @Query("country_id") country_id: Int?
+    ): Search?
+
+    @GET("documents")
+    suspend fun documentsUser(id: Int): DocumentsUser?
 
 }

@@ -9,6 +9,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yana.fakername.dataClass.DocumentsPage
 import com.example.yana.fakername.databinding.ItemRecyclerBinding
+import com.example.yana.fakername.fragments.DetailsFragment
 import com.example.yana.fakername.prefs.SharedPreferenceFaker
 import com.example.yana.fakername.utils.DocumentDiffUtil
 import java.text.SimpleDateFormat
