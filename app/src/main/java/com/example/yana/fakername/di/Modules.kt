@@ -30,7 +30,7 @@ val networkModule = module {
     }
 }
 val viewModelModule = module {
-    viewModel { MainViewModel(get(), get()) }
+    viewModel { MainViewModel(get(), get(),get()) }
     viewModel { RegistrationViewModel(get(), get()) }
     viewModel { DataAddViewModel(get(), get(), get()) }
     viewModel { PrivateCabinetViewModel(get(), get(),get()) }

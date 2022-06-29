@@ -62,14 +62,9 @@ interface FakerService {
         @Query("country_id") country_id: Int?
     ): Search?
 
-    @GET("search")
-    suspend fun searchUser(
-        @Query("text") text: String,
-        @Query("page") page: Int,
-        @Query("country_id") country_id: Int?
-    ): Search?
-
-    @GET("documents")
-    suspend fun documentsUser(id: Int): DocumentsUser?
+    @GET("documents/{id}")
+    suspend fun documentsUser(
+        @Path("id") id: Int
+    ): DocumentsUser?
 
 }

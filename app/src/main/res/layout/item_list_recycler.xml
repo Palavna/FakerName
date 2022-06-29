@@ -5,7 +5,7 @@
     android:layout_height="200dp"
     android:layout_margin="12dp">
 
-    <EditText
+    <TextView
         android:id="@+id/nameUser"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toStartOf="@id/positive"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/commentUser"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

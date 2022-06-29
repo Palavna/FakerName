@@ -51,11 +51,11 @@ class MainFragment: Fragment(R.layout.fragment_main) {
     private fun doSomething(search: EditText) {
         search.setOnEditorActionListener(TextView.OnEditorActionListener{ _, actionId, _ ->
 
-            if (actionId == EditorInfo.IME_ACTION_GO) {
-                if(search.text.toString() == "geeksforgeeks"){
-                    Toast.makeText(requireContext(), "Welcome to GFG", Toast.LENGTH_LONG).show()
-                } else {
-                    Toast.makeText(requireContext(), "Invalid Input", Toast.LENGTH_LONG).show()
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                if (isMainValid()){
+                        hideKeyboard()
+                    (requireActivity() as MainActivity).changeFragment(DetailsFragment.create(binding.etFaker.text.toString(),
+                        (binding.spinner.selectedItem as? Countries)?.id ?: -1 ), true)
                 }
 
                 return@OnEditorActionListener true

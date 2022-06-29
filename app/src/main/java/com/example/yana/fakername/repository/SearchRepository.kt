@@ -5,17 +5,12 @@ import com.example.yana.fakername.iteractor.SearchIteractor
 
 interface SearchRepository {
     suspend fun search(text: String, page: Int, id: Int?): Search?
-    suspend fun searchUser(text: String, page: Int, id: Int?): Search?
 }
 
 
 class SearchRepositoryImpl(private val iteractor: SearchIteractor): SearchRepository{
     override suspend fun search(text: String, page: Int, id: Int?): Search? {
         return iteractor.search(text, page, id)
-    }
-
-    override suspend fun searchUser(text: String, page: Int, id: Int?): Search? {
-        return iteractor.searchUser(text, page, id)
     }
 
 }

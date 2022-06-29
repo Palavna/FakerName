@@ -5,12 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.yana.fakername.dataClass.Countries
+import com.example.yana.fakername.repository.DocumentRepository
 import com.example.yana.fakername.repository.FakerRepository
 import com.example.yana.fakername.repository.SearchRepository
 import com.example.yana.fakername.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
 
-class MainViewModel(val repository: FakerRepository, val repos: SearchRepository): ViewModel() {
+class MainViewModel(val repository: FakerRepository, val repos: SearchRepository, private val reposUser: DocumentRepository): ViewModel() {
 
     init {
         loadCountriesId()
@@ -32,10 +33,17 @@ class MainViewModel(val repository: FakerRepository, val repos: SearchRepository
             }
         }
     }
-    fun search(text: String,page: Int, id: Int?){
+
+    fun search(text: String, id: Int?){
         viewModelScope.launch {
             kotlin.runCatching {
-                val search = repos.search(text,page,id)
+                val search = repos.search(text,0, id)
+                val user = search?.data?.firstOrNull()
+                if (user?.id != null){
+                    val result = reposUser.documentsUser(user.id)
+                }else {
+                    Log.d("vvvvvvvvv", "nnnnnnnnnn")
+                }
                 eventAuth.postValue(search != null)
                 Log.d("vvvvvvvvv", "nnnnnnnnnn")
             }.onFailure {
