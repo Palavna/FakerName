@@ -33,14 +33,10 @@ class AddTextFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.eventAuth.observe(viewLifecycleOwner, {
-            if (it)requireContext().cleanLaunchActivity<MainActivity>()
-        })
         onCheckboxClicked()
         setupListeners()
-
-        binding.zabiliPass.setOnClickListener(View.OnClickListener {
-            Toast.makeText(requireContext(), "asasasasa", Toast.LENGTH_LONG).show()
+        viewModel.eventAuth.observe(viewLifecycleOwner, {
+            if (it)requireContext().cleanLaunchActivity<MainActivity>()
         })
     }
 
@@ -59,7 +55,9 @@ class AddTextFragment: Fragment() {
                 )
             }
         }
-
+        binding.zabiliPass.setOnClickListener{
+            Toast.makeText(requireContext(), "forgotPassword", Toast.LENGTH_LONG).show()
+        }
     }
         fun isEmailValid(email: String): Boolean {
             if (email.isEmpty()) {

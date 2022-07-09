@@ -49,6 +49,10 @@ class RegistrationFragment: Fragment() {
         binding.btnRegistrationReg.setOnClickListener {
             (requireActivity() as MainActivity).changeFragment(RegisterNameFragment(), true)
         }
+
+        binding.forgotPass.setOnClickListener{
+            Toast.makeText(requireContext(), "text", Toast.LENGTH_LONG).show()
+        }
     }
     fun isEmailValid(email: String): Boolean {
         if (email.isEmpty()) {
