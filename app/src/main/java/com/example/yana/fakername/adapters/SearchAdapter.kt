@@ -25,8 +25,6 @@ class SearchVH(private val binding: ItemListRecyclerBinding, private val listene
    RecyclerView.ViewHolder(binding.root){
 
     fun bind(documents: SearchModel){
-        binding.nameUser.text = documents.user_id.toString()
-        binding.commentUser.text = documents.description
 //        binding.inn.text = documents.inn ?: documents.passport
 //        binding.comment.text = documents.country.name
 //
@@ -34,18 +32,9 @@ class SearchVH(private val binding: ItemListRecyclerBinding, private val listene
 //        binding.positiveTv.text = documents.positiveCount.toString()
 //        binding.negativeTv.text = documents.negativeCount.toString()
 
-        binding.edit.setOnClickListener {
-            listener.editDocument(documents.id)
-        }
-
-
-        val htmlString: String = documents.description ?: "Отсутствует"
-        val spanned: Spanned = HtmlCompat
-            .fromHtml(
-                htmlString,
-                HtmlCompat.FROM_HTML_MODE_LEGACY
-            )
-        binding.commentUser.text = spanned.trim()
+//        binding.edit.setOnClickListener {
+//            listener.editDocument(documents.id)
+//        }
     }
 
 

@@ -1,172 +1,263 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent">
 
-    <TextView
-        android:id="@+id/id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:text="@string/inn"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/telephoneNam"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="8dp"
-        android:hint="1234567"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@id/id"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textCom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:text="@string/country"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/barrier3" />
-
-    <TextView
-        android:id="@+id/country"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="8dp"
-        android:hint="1234567"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@id/textCom"
-        app:layout_constraintTop_toBottomOf="@id/barrier3" />
-
-    <TextView
-        android:id="@+id/desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:text="@string/opisanie"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/barrier2" />
-
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="8dp"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@id/desc"
-        app:layout_constraintTop_toBottomOf="@id/barrier2" />
-
-    <TextView
-        android:id="@+id/pos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:text="@string/posit"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/barrier4" />
-
-    <TextView
-        android:id="@+id/positiveTv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="8dp"
-        android:hint="1234567"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@id/pos"
-        app:layout_constraintTop_toBottomOf="@id/barrier4" />
-
-    <TextView
-        android:id="@+id/neg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:text="@string/negat"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/barrier5" />
-
-    <TextView
-        android:id="@+id/negativeTv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="8dp"
-        android:hint="1234567"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@id/neg"
-        app:layout_constraintTop_toBottomOf="@id/barrier5" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="textCom, country" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="id, telephoneNam" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="desc, description" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="pos, positiveTv" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="neg, negativeTv" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        tools:itemCount="2"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_list_recycler"
-        android:layout_margin="12dp"
-        app:layout_constraintTop_toBottomOf="@id/barrier6"
-        android:id="@+id/recyclerList"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:text="@string/inn"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/telephoneNam"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="8dp"
+            android:hint="1234567"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/id"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textCom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:text="@string/country"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier3" />
+
+        <TextView
+            android:id="@+id/country"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="8dp"
+            android:hint="1234567"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/textCom"
+            app:layout_constraintTop_toBottomOf="@id/barrier3" />
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:text="@string/opisanie"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier2" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="8dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/desc"
+            app:layout_constraintTop_toBottomOf="@id/barrier2" />
+
+        <TextView
+            android:id="@+id/pos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:text="@string/posit"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier4" />
+
+        <TextView
+            android:id="@+id/positiveTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="8dp"
+            android:hint="1234567"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/pos"
+            app:layout_constraintTop_toBottomOf="@id/barrier4" />
+
+        <TextView
+            android:id="@+id/neg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:text="@string/negat"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier5" />
+
+        <TextView
+            android:id="@+id/negativeTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="8dp"
+            android:hint="1234567"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/neg"
+            app:layout_constraintTop_toBottomOf="@id/barrier5" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="textCom, country" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="id, telephoneNam" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="desc, description" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="pos, positiveTv" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="neg, negativeTv" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="6dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/barrier6"
+            tools:listitem="@layout/item_list_recycler" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:background="@drawable/bg_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerList">
+
+            <EditText
+                android:id="@+id/etAddTextEditCom"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="top|start"
+                android:background="@drawable/bg_layout"
+                android:inputType="textMultiLine"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioGroup
+                android:id="@+id/radios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etAddTextEditCom">
+
+                <RadioButton
+                    android:id="@+id/positive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="22dp"
+                    android:background="@drawable/bg_layout_green"
+                    android:gravity="center_vertical"
+                    android:layoutDirection="rtl"
+                    android:paddingHorizontal="16dp"
+                    android:paddingStart="2dp"
+                    android:text="@string/positive"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/etAddText"
+                    tools:ignore="RtlSymmetry" />
+
+                <RadioButton
+                    android:id="@+id/negative"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="22dp"
+                    android:background="@drawable/bg_layout_red"
+                    android:gravity="center_vertical"
+                    android:layoutDirection="rtl"
+                    android:paddingHorizontal="20dp"
+                    android:paddingStart="2dp"
+                    android:text="@string/negative"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/positive"
+                    tools:ignore="RtlSymmetry" />
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btnSaveEditCom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="18dp"
+                android:background="@drawable/bg_btn_send"
+                android:text="@string/save"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/radios" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

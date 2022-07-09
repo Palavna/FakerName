@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.yana.fakername.adapters.DocumentListener
 import com.example.yana.fakername.adapters.DocumentsAdapter
+import com.example.yana.fakername.dataClass.DocumentsPage
 import com.example.yana.fakername.databinding.FragmentPrivateCabinetBinding
 import com.example.yana.fakername.fragmentsViewModel.PrivateCabinetViewModel
 import com.example.yana.fakername.ui.CastomViewCallback
@@ -72,6 +73,6 @@ class PrivateCabinetFragment: Fragment(), CastomViewCallback, DocumentListener {
     }
 
     override fun editDocument(id: Int) {
-
+        (requireActivity() as MainActivity).changeFragment(EditCommentFragment(id), true)
     }
 }

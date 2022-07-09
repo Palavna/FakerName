@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.yana.fakername.adapters.DocumentListener
 import com.example.yana.fakername.adapters.DocumentsAdapter
+import com.example.yana.fakername.dataClass.DocumentsPage
 import com.example.yana.fakername.databinding.FragmentAboutBinding
 import com.example.yana.fakername.fragmentsViewModel.AboutViewModel
 import com.example.yana.fakername.ui.MainActivity

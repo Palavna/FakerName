@@ -67,4 +67,9 @@ interface FakerService {
         @Path("id") id: Int
     ): DocumentsUser?
 
+    @GET("comments/{id}")
+    suspend fun showComment(
+        @Path("id") id: Int
+    ): ShowComment?
+
 }

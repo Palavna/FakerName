@@ -10,6 +10,6 @@ data class DocumentsUser (
     val user_id: Int,
     val created_at: String,
     val updated_at: String,
-    val commentUser: List<CommentsUser>
+    val comments: List<CommentsUser>
 
         )

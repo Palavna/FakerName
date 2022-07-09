@@ -1,0 +1,44 @@
+package com.example.yana.fakername.adapters
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.example.yana.fakername.dataClass.CommentsUser
+import com.example.yana.fakername.databinding.ItemListRecyclerBinding
+import com.example.yana.fakername.utils.getTextIsNotEmpty
+
+class CommentListAdapter(private val listener: (DocumentListener)):RecyclerView.Adapter<CommentListAdapterVH>() {
+
+    private val list = arrayListOf<CommentsUser>()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentListAdapterVH {
+        val binding = ItemListRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CommentListAdapterVH(binding, listener)
+    }
+
+    override fun onBindViewHolder(holder: CommentListAdapterVH, position: Int) {
+        holder.bind(list[position])
+    }
+
+    override fun getItemCount(): Int {
+        return list.size
+    }
+    fun update(comment: List<CommentsUser>) {
+        list.clear()
+        list.addAll(comment)
+        notifyDataSetChanged()
+    }
+}
+
+class CommentListAdapterVH(val binding: ItemListRecyclerBinding, private val listener: (DocumentListener)):
+    RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(commentUser: CommentsUser){
+            binding.nameUser.text = commentUser.user.name
+            binding.commentUser.text = commentUser.text.getTextIsNotEmpty()
+
+            binding.edit.setOnClickListener {
+                listener.editDocument(commentUser.id)
+            }
+        }
+}

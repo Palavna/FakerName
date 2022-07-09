@@ -10,14 +10,18 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.yana.fakername.dataClass.DocumentsUser
 import com.example.yana.fakername.dataClass.SearchModel
+import com.example.yana.fakername.dataClass.ShowComment
+import com.example.yana.fakername.repository.CreateCommentRepository
 import com.example.yana.fakername.repository.DocumentRepository
 import com.example.yana.fakername.repository.SearchRepository
 import com.example.yana.fakername.utils.SearchSource
 import com.example.yana.fakername.utils.SingleLiveEvent
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class DetailsViewModel(private val repos: SearchRepository, private val reposUser: DocumentRepository): ViewModel() {
+class DetailsViewModel(private val repos: SearchRepository, private val reposUser: DocumentRepository,
+                       private val comRepos: CreateCommentRepository): ViewModel() {
 
     val eventAuth = SingleLiveEvent<Boolean>()
     val saveDoc = MutableLiveData<DocumentsUser?>()
@@ -31,7 +35,7 @@ class DetailsViewModel(private val repos: SearchRepository, private val reposUse
     }
 
     fun search(text: String, id: Int?){
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             kotlin.runCatching {
                 val searchUser = repos.search(text,0,id)
                 val user = searchUser?.data?.firstOrNull()
@@ -50,20 +54,21 @@ class DetailsViewModel(private val repos: SearchRepository, private val reposUse
         }
     }
 
-    fun documentsUser(id: Int){
-        viewModelScope.launch {
-            kotlin.runCatching {
-                val searchUser = reposUser.documentsUser(id)
-                val user = searchUser?.commentUser?.firstOrNull()
-                if (user?.id != null){
-                    val result = reposUser.documentsUser(user.id)
-                }else {
-                    Log.d("wwwwwwwww", "oooooooooo")
-                }
-                Log.d("vvvvvvvvv", "nnnnnnnnnn")
-            }.onFailure {
-                Log.d("vvvvvvvvv", "nnnnnnnnnn")
-            }
-        }
-    }
+//    fun showComment(id: Int){
+//        viewModelScope.launch {
+//            kotlin.runCatching {
+//                val searchUser = comRepos.showComment(id)
+//                val user = searchUser?
+//                if (id != null){
+//                    val result = comRepos.showComment(id)
+//                    show.postValue(result)
+//                }else {
+//                    Log.d("wwwwwwwww", "oooooooooo")
+//                }
+//                Log.d("vvvvvvvvv", "nnnnnnnnnn")
+//            }.onFailure {
+//                Log.d("vvvvvvvvv", "nnnnnnnnnn")
+//            }
+//        }
+//    }
 }

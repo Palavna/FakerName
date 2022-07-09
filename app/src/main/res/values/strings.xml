@@ -36,10 +36,10 @@
     <string name="save">Сохранить</string>
     <string name="negative">Отрицательный</string>
     <string name="positive">Положительный</string>
-    <string name="country">Страна</string>
-    <string name="opisanie">Описание</string>
-    <string name="posit">Позитивные</string>
-    <string name="negat">Негативные</string>
+    <string name="country">Страна :</string>
+    <string name="opisanie">Описание :</string>
+    <string name="posit">Позитивные :</string>
+    <string name="negat">Негативные :</string>
 
     <plurals name="empty_field_msg">
         <item quantity="one">Пожалуйста, заполните обязательное поле:\u0020</item>

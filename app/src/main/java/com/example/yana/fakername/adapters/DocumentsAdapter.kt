@@ -1,5 +1,6 @@
 package com.example.yana.fakername.adapters
 
+import android.app.AlertDialog
 import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -39,6 +40,14 @@ class DocumentsVH(private val binding: ItemRecyclerBinding, private val listener
 
         binding.edit.setOnClickListener {
             listener.editDocument(documents.id)
+
+//            binding.delete.setOnClickListener {
+//                AlertDialog.Builder(itemView.context)
+//                    .setTitle("Вы уверены что хотите удалить запись?")
+//                    .setPositiveButton("да") { _, _ ->  }
+//                    .setNegativeButton("нет") { _, _ -> }
+//                    .show()
+//            }
         }
 
         setupDate(documents.created_at)

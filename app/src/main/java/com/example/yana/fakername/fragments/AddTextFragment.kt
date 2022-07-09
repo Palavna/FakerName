@@ -38,6 +38,10 @@ class AddTextFragment: Fragment() {
         })
         onCheckboxClicked()
         setupListeners()
+
+        binding.zabiliPass.setOnClickListener(View.OnClickListener {
+            Toast.makeText(requireContext(), "asasasasa", Toast.LENGTH_LONG).show()
+        })
     }
 
     private fun onCheckboxClicked(){
@@ -55,6 +59,7 @@ class AddTextFragment: Fragment() {
                 )
             }
         }
+
     }
         fun isEmailValid(email: String): Boolean {
             if (email.isEmpty()) {
