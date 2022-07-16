@@ -38,12 +38,15 @@ class DetailsViewModel(private val repos: SearchRepository, private val reposUse
     fun search(text: String, id: Int?){
         viewModelScope.launch(Dispatchers.IO) {
             kotlin.runCatching {
+                progress.postValue(true)
                 val searchUser = repos.search(text,0,id)
                 val user = searchUser?.data?.firstOrNull()
+                progress.postValue(true)
                 if (user?.id != null){
                     val result = reposUser.documentsUser(user.id)
                     saveDoc.postValue(result)
                     userDoc.postValue(user)
+                    progress.postValue(false)
                 }else {
                     Log.d("wwwwwwwww", "oooooooooo")
                 }
@@ -57,8 +60,10 @@ class DetailsViewModel(private val repos: SearchRepository, private val reposUse
     fun createDocument(countryId: Int, passport: String, comment: String, positive: Boolean) {
         viewModelScope.launch {
             kotlin.runCatching {
+                progress.postValue(true)
                 val createCom = reposDoc.createDocument(countryId, passport, comment,positive)
                 eventAuth.postValue(createCom != null)
+                progress.postValue(true)
                 search(passport,countryId)
                 progress.postValue(false)
                 Log.d("dfghdfgh", "fghjfghjfg")

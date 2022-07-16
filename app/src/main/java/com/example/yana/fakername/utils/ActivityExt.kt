@@ -3,6 +3,7 @@ package com.example.yana.fakername.utils
 import android.content.Context
 import android.content.Intent
 import android.text.Spanned
+import android.view.View
 import androidx.core.text.HtmlCompat
 
 inline fun <reified T> Context.cleanLaunchActivity(){
@@ -21,4 +22,11 @@ fun String?.getTextIsNotEmpty(): String {
             HtmlCompat.FROM_HTML_MODE_LEGACY
         )
      return spanned.trim().toString()
+}
+
+fun View.setSafeOnClickListener(onSafeClick: (View) -> Unit) {
+    val safeClickListener = SafeClickListener {
+        onSafeClick(it)
+    }
+    setOnClickListener(safeClickListener)
 }

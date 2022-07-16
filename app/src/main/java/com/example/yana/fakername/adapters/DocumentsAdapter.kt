@@ -38,7 +38,7 @@ class DocumentsVH(private val binding: ItemRecyclerBinding, private val listener
         binding.comment.text = documents.description
         binding.data.text = documents.created_at
 
-        binding.edit.setOnClickListener {
+        binding.btnEdit.setOnClickListener {
             listener.editDocument(documents.id)
 
 //            binding.delete.setOnClickListener {

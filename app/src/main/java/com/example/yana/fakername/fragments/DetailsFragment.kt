@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.yana.fakername.adapters.CommentListAdapter
 import com.example.yana.fakername.adapters.DocumentListener
 import com.example.yana.fakername.adapters.SearchAdapter
@@ -16,6 +18,7 @@ import com.example.yana.fakername.databinding.FragmentDetailsBinding
 import com.example.yana.fakername.fragmentsViewModel.DetailsViewModel
 import com.example.yana.fakername.ui.MainActivity
 import com.example.yana.fakername.utils.getTextIsNotEmpty
+import com.example.yana.fakername.utils.setSafeOnClickListener
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -47,13 +50,11 @@ class DetailsFragment() : Fragment(), DocumentListener {
         super.onViewCreated(view, savedInstanceState)
         binding.groupTv.isVisible = false
 
-        viewModel.progress.observe(this, {
-            binding.progress.isVisible = it
-        })
 
+        binding.recyclerList.addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
         binding.recyclerList.adapter = adapterList
 
-        binding.btnSaveEditCom.setOnClickListener{
+        binding.btnSaveEditCom.setSafeOnClickListener{
             if (isInnValid()){
                 viewModel.createDocument(
                     countryId, query,
@@ -61,6 +62,10 @@ class DetailsFragment() : Fragment(), DocumentListener {
                     binding.positive.isChecked)
                 binding.etAddTextEditCom.setText("")
             }
+
+            viewModel.progress.observe(this, {
+                binding.progress.isVisible = it
+            })
         }
 
         lifecycleScope.launch {

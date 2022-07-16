@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
-    android:layout_margin="12dp">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
 
     <TextView
         android:id="@+id/nameUser"
@@ -23,7 +23,7 @@
         android:textSize="16sp"
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
-        app:layout_constraintEnd_toStartOf="@id/edit"
+        app:layout_constraintEnd_toStartOf="@id/btnEdit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/barrier1" />
 
@@ -33,7 +33,7 @@
         android:layout_height="54dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="12dp"
-        android:background="@drawable/bg_layout_green"
+        android:background="@drawable/bg_status_btn"
         android:text="@string/positive"
         android:textColor="@color/white"
         android:textSize="11sp"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/edit"
+        android:id="@+id/btnEdit"
         android:layout_width="140dp"
         android:layout_height="54dp"
         android:layout_marginTop="6dp"
@@ -50,18 +50,10 @@
         android:text="@string/edit"
         android:textColor="@color/white"
         android:textSize="12sp"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/positive" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="12dp"
-        android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/edit" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
@@ -75,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="edit" />
+        app:constraint_referenced_ids="btnEdit" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

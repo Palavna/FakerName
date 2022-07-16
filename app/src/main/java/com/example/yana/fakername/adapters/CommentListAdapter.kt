@@ -2,9 +2,14 @@ package com.example.yana.fakername.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.example.yana.fakername.R
+import com.example.yana.fakername.data.StatusMessageEnum
 import com.example.yana.fakername.dataClass.CommentsUser
 import com.example.yana.fakername.databinding.ItemListRecyclerBinding
+import com.example.yana.fakername.prefs.SharedPreferenceFaker
 import com.example.yana.fakername.utils.getTextIsNotEmpty
 
 class CommentListAdapter(private val listener: (DocumentListener)):RecyclerView.Adapter<CommentListAdapterVH>() {
@@ -37,7 +42,12 @@ class CommentListAdapterVH(val binding: ItemListRecyclerBinding, private val lis
             binding.nameUser.text = commentUser.user.name
             binding.commentUser.text = commentUser.text.getTextIsNotEmpty()
 
-            binding.edit.setOnClickListener {
+            binding.positive.isActivated = StatusMessageEnum.isPositiveStatus(commentUser.is_positive)
+            binding.positive.text = binding.root.context.getString(StatusMessageEnum.getStatusText(commentUser.is_positive))
+
+            binding.btnEdit.isInvisible = commentUser.user_id != SharedPreferenceFaker.id
+
+            binding.btnEdit.setOnClickListener {
                 listener.editDocument(commentUser.id)
             }
         }
