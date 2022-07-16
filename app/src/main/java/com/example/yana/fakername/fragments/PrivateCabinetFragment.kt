@@ -41,7 +41,7 @@ class PrivateCabinetFragment: Fragment(), CastomViewCallback, DocumentListener {
             if (it)requireContext().cleanLaunchActivity<MainActivity>()
         })
 
-        binding.recyclerCom.adapter = adapter
+//        binding.recyclerCom.adapter = adapter
 
         lifecycleScope.launch {
             viewModel.doc().collect { adapter.submitData(it) }

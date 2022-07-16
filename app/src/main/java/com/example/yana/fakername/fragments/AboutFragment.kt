@@ -35,7 +35,7 @@ class AboutFragment: Fragment(), DocumentListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerDoc.adapter = adapter
+//        binding.recyclerDoc.adapter = adapter
 
         lifecycleScope.launch {
             viewModel.doc().collect { adapter.submitData(it) }
