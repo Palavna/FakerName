@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.yana.fakername.adapters.CommentListAdapter
 import com.example.yana.fakername.adapters.DocumentListener
 import com.example.yana.fakername.adapters.SearchAdapter
+import com.example.yana.fakername.dataClass.Countries
 import com.example.yana.fakername.dataClass.DocumentsPage
 import com.example.yana.fakername.databinding.FragmentDetailsBinding
 import com.example.yana.fakername.fragmentsViewModel.DetailsViewModel
@@ -43,8 +45,23 @@ class DetailsFragment() : Fragment(), DocumentListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.groupTv.isVisible = false
+
+        viewModel.progress.observe(this, {
+            binding.progress.isVisible = it
+        })
 
         binding.recyclerList.adapter = adapterList
+
+        binding.btnSaveEditCom.setOnClickListener{
+            if (isInnValid()){
+                viewModel.createDocument(
+                    countryId, query,
+                    binding.etAddTextEditCom.text.toString(),
+                    binding.positive.isChecked)
+                binding.etAddTextEditCom.setText("")
+            }
+        }
 
         lifecycleScope.launch {
             viewModel.doc(query, countryId).collect { adapter.submitData(it) }
@@ -53,6 +70,8 @@ class DetailsFragment() : Fragment(), DocumentListener {
         viewModel.search(query, countryId)
         viewModel.saveDoc.observe(viewLifecycleOwner, {
             adapterList.update(it?.comments ?: emptyList())
+            binding.groupTv.isVisible = it?.comments?.isNotEmpty() == true
+            binding.tvEmptiMessege.isVisible = it?.comments?.isEmpty() == true
         }
         )
 
@@ -65,6 +84,24 @@ class DetailsFragment() : Fragment(), DocumentListener {
 
         }
         )
+    }
+
+    fun isInnValid(): Boolean {
+
+        var isValid = true
+        var missiedFileds = mutableListOf<String>()
+
+        if (binding.etAddTextEditCom.text.toString().length<10) {
+            binding.etAddTextEditCom.error = "оставьте комментарий"
+            missiedFileds.add("оставьте комментарий")
+            isValid = false
+        }
+        if (!binding.positive.isChecked && !binding.negative.isChecked){
+            missiedFileds.add("radio button")
+            isValid = false
+        }
+
+        return isValid
     }
 
 

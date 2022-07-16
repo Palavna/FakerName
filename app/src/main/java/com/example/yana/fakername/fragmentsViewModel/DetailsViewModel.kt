@@ -21,11 +21,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class DetailsViewModel(private val repos: SearchRepository, private val reposUser: DocumentRepository,
-                       private val comRepos: CreateCommentRepository): ViewModel() {
+                       private val reposDoc: DocumentRepository): ViewModel() {
 
     val eventAuth = SingleLiveEvent<Boolean>()
     val saveDoc = MutableLiveData<DocumentsUser?>()
     val userDoc = MutableLiveData<SearchModel?>()
+    val progress = MutableLiveData(false)
 
 
     fun doc(query: String, countryId: Int): Flow<PagingData<SearchModel>> {
@@ -53,22 +54,17 @@ class DetailsViewModel(private val repos: SearchRepository, private val reposUse
             }
         }
     }
-
-//    fun showComment(id: Int){
-//        viewModelScope.launch {
-//            kotlin.runCatching {
-//                val searchUser = comRepos.showComment(id)
-//                val user = searchUser?
-//                if (id != null){
-//                    val result = comRepos.showComment(id)
-//                    show.postValue(result)
-//                }else {
-//                    Log.d("wwwwwwwww", "oooooooooo")
-//                }
-//                Log.d("vvvvvvvvv", "nnnnnnnnnn")
-//            }.onFailure {
-//                Log.d("vvvvvvvvv", "nnnnnnnnnn")
-//            }
-//        }
-//    }
+    fun createDocument(countryId: Int, passport: String, comment: String, positive: Boolean) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                val createCom = reposDoc.createDocument(countryId, passport, comment,positive)
+                eventAuth.postValue(createCom != null)
+                search(passport,countryId)
+                progress.postValue(false)
+                Log.d("dfghdfgh", "fghjfghjfg")
+            }.onFailure {
+                Log.d("dfghdfgh", "fghjfghjfg")
+            }
+        }
+    }
 }

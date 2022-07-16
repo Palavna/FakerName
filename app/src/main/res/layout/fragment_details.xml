@@ -14,6 +14,26 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:textSize="22sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:paddingBottom="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="По вашему запросу ничего не найдено. Xотите добавить?"
+            android:id="@+id/tvEmptiMessege"
+            app:layout_constraintTop_toBottomOf="@id/recyclerList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="id, telephoneNam, textCom, country, desc, description, pos, positiveTv, neg, negativeTv" />
+
+        <TextView
             android:id="@+id/id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -161,7 +181,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="neg, negativeTv" />
+            app:constraint_referenced_ids="neg, negativeTv, tvEmptiMessege" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerList"
@@ -190,8 +210,12 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="26dp"
                 android:layout_marginEnd="20dp"
-                android:gravity="top|start"
+                android:paddingTop="10dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="10dp"
                 android:background="@drawable/bg_layout"
+                android:gravity="top|start"
                 android:inputType="textMultiLine"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -246,8 +270,8 @@
                 android:id="@+id/btnSaveEditCom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="18dp"
                 android:background="@drawable/bg_btn_send"
@@ -255,6 +279,17 @@
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/radios" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
