@@ -51,7 +51,7 @@ class RegistrationFragment: Fragment() {
         }
 
         binding.forgotPass.setOnClickListener{
-            Toast.makeText(requireContext(), "text", Toast.LENGTH_LONG).show()
+            (requireActivity() as MainActivity).changeFragment(ForgotPasswordFragment(), true)
         }
     }
     fun isEmailValid(email: String): Boolean {

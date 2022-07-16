@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_addTextFragment_to_registerNameFragment2"
             app:destination="@id/registerNameFragment" />
+        <action
+            android:id="@+id/action_addTextFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/dataAddFragment2"
@@ -34,6 +37,9 @@
         <action
             android:id="@+id/action_registrationFragment_to_registerNameFragment"
             app:destination="@id/registerNameFragment" />
+        <action
+            android:id="@+id/action_registrationFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerNameFragment"
@@ -76,4 +82,9 @@
             android:id="@+id/action_mainFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        tools:layout="@layout/fragment_forgot_password"
+        android:name="com.example.yana.fakername.fragments.ForgotPasswordFragment"
+        android:label="ForgotPasswordFragment" />
 </navigation>
