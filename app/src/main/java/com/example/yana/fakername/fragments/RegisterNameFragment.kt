@@ -11,6 +11,7 @@ import com.example.yana.fakername.databinding.FragmentRegisterNameBinding
 import com.example.yana.fakername.fragmentsViewModel.RegisterNameViewModel
 import com.example.yana.fakername.ui.MainActivity
 import com.example.yana.fakername.utils.cleanLaunchActivity
+import com.example.yana.fakername.utils.setSafeOnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegisterNameFragment: Fragment() {
@@ -37,7 +38,7 @@ class RegisterNameFragment: Fragment() {
     }
 
     private fun setupListeners() {
-        binding.btnRegistrationName.setOnClickListener {
+        binding.btnRegistrationName.setSafeOnClickListener {
             if (isEmailValid(binding.etEmail.text.toString(),
                     binding.etPasswordRepeat.text.toString())) {
                 viewModel.register(

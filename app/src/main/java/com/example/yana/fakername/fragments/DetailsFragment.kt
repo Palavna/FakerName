@@ -75,8 +75,6 @@ class DetailsFragment() : Fragment(), DocumentListener {
         viewModel.search(query, countryId)
         viewModel.saveDoc.observe(viewLifecycleOwner, {
             adapterList.update(it?.comments ?: emptyList())
-            binding.groupTv.isVisible = it?.comments?.isNotEmpty() == true
-            binding.tvEmptiMessege.isVisible = it?.comments?.isEmpty() == true
         }
         )
 
@@ -86,6 +84,8 @@ class DetailsFragment() : Fragment(), DocumentListener {
             binding.description.text = it?.description.getTextIsNotEmpty()
             binding.positiveTv.text = it?.positiveCount.toString()
             binding.negativeTv.text = it?.negativeCount.toString()
+            binding.groupTv.isVisible = it != null
+            binding.tvEmptiMessege.isVisible = it == null
 
         }
         )

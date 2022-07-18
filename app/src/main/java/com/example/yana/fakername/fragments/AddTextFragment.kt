@@ -15,6 +15,7 @@ import com.example.yana.fakername.fragmentsViewModel.AddTextViewModel
 import com.example.yana.fakername.prefs.SharedPreferenceFaker
 import com.example.yana.fakername.ui.MainActivity
 import com.example.yana.fakername.utils.cleanLaunchActivity
+import com.example.yana.fakername.utils.setSafeOnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddTextFragment: Fragment() {
@@ -47,7 +48,7 @@ class AddTextFragment: Fragment() {
        }
 
     private fun setupListeners() {
-        binding.btnVhod.setOnClickListener {
+        binding.btnVhod.setSafeOnClickListener {
             if (isEmailValid(binding.emailEt.text.toString())) {
                 viewModel.login(
                     binding.emailEt.text.toString(),
@@ -55,7 +56,7 @@ class AddTextFragment: Fragment() {
                 )
             }
         }
-        binding.zabiliPass.setOnClickListener{
+        binding.zabiliPass.setSafeOnClickListener{
             Toast.makeText(requireContext(), "forgotPassword", Toast.LENGTH_LONG).show()
         }
     }

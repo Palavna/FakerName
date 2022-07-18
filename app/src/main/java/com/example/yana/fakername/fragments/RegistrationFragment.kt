@@ -13,6 +13,7 @@ import com.example.yana.fakername.fragmentsViewModel.RegistrationViewModel
 import com.example.yana.fakername.ui.MainActivity
 import com.example.yana.fakername.utils.changeFragment
 import com.example.yana.fakername.utils.cleanLaunchActivity
+import com.example.yana.fakername.utils.setSafeOnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.regex.Pattern
 
@@ -39,18 +40,18 @@ class RegistrationFragment: Fragment() {
     }
 
     private fun setupListeners() {
-        binding.btnVhodReg.setOnClickListener {
+        binding.btnVhodReg.setSafeOnClickListener {
             if (isEmailValid(binding.emailEtReg.text.toString())){
                 viewModel.login(
                     binding.emailEtReg.text.toString(),
                     binding.passwordEtReg.text.toString())
             }
         }
-        binding.btnRegistrationReg.setOnClickListener {
+        binding.btnRegistrationReg.setSafeOnClickListener {
             (requireActivity() as MainActivity).changeFragment(RegisterNameFragment(), true)
         }
 
-        binding.forgotPass.setOnClickListener{
+        binding.forgotPass.setSafeOnClickListener{
             (requireActivity() as MainActivity).changeFragment(ForgotPasswordFragment(), true)
         }
     }

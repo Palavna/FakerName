@@ -15,6 +15,7 @@ import com.example.yana.fakername.fragmentsViewModel.DataAddViewModel
 import com.example.yana.fakername.ui.FragmentCallBack
 import com.example.yana.fakername.ui.MainActivity
 import com.example.yana.fakername.utils.cleanLaunchActivity
+import com.example.yana.fakername.utils.setSafeOnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DataAddFragment: Fragment() {
@@ -49,7 +50,7 @@ class DataAddFragment: Fragment() {
     }
 
     fun setupListeners(){
-        binding.btnSend.setOnClickListener {
+        binding.btnSend.setSafeOnClickListener {
             if (isInnValid()){
                 viewModel.createDocument(
                     (binding.spinnerAdd.selectedItem as Countries).id,

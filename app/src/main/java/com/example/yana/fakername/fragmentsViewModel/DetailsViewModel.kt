@@ -45,11 +45,11 @@ class DetailsViewModel(private val repos: SearchRepository, private val reposUse
                 if (user?.id != null){
                     val result = reposUser.documentsUser(user.id)
                     saveDoc.postValue(result)
-                    userDoc.postValue(user)
                     progress.postValue(false)
                 }else {
                     Log.d("wwwwwwwww", "oooooooooo")
                 }
+                userDoc.postValue(user)
                 eventAuth.postValue(searchUser != null)
                 Log.d("vvvvvvvvv", "nnnnnnnnnn")
             }.onFailure {

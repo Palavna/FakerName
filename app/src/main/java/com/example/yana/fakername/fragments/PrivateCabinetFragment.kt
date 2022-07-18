@@ -15,6 +15,7 @@ import com.example.yana.fakername.fragmentsViewModel.PrivateCabinetViewModel
 import com.example.yana.fakername.ui.CastomViewCallback
 import com.example.yana.fakername.ui.MainActivity
 import com.example.yana.fakername.utils.cleanLaunchActivity
+import com.example.yana.fakername.utils.setSafeOnClickListener
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -62,7 +63,7 @@ class PrivateCabinetFragment: Fragment(), CastomViewCallback, DocumentListener {
     }
 
     private fun setupListeners() {
-        binding.btnExit.setOnClickListener {
+        binding.btnExit.setSafeOnClickListener {
             viewModel.logout()
         }
         binding.view.setupListener(this)
