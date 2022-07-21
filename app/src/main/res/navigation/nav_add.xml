@@ -8,6 +8,14 @@
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.example.yana.fakername.fragments.RegistrationFragment"
-        android:label="RegistrationFragment" />
+        android:label="RegistrationFragment">
+        <action
+            android:id="@+id/action_to_registration_fragment"
+            app:destination="@id/registerNameFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerNameFragment2"
+        android:name="com.example.yana.fakername.fragments.RegisterNameFragment"
+        android:label="RegisterNameFragment" />
 
 </navigation>

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.example.yana.fakername.databinding.FragmentRegisterNameBinding
 import com.example.yana.fakername.fragmentsViewModel.RegisterNameViewModel
 import com.example.yana.fakername.ui.MainActivity
+import com.example.yana.fakername.ui.SelectScreenActivity
 import com.example.yana.fakername.utils.cleanLaunchActivity
 import com.example.yana.fakername.utils.setSafeOnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,7 +33,7 @@ class RegisterNameFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
         viewModel.eventAuth.observe(viewLifecycleOwner, {
-            if (it)requireContext().cleanLaunchActivity<MainActivity>()
+            if (it)requireContext().cleanLaunchActivity<SelectScreenActivity>()
             Toast.makeText(requireContext(), "dfdfgeewewew$it", Toast.LENGTH_SHORT).show()
         })
     }

@@ -14,6 +14,7 @@ import com.example.yana.fakername.databinding.FragmentAddTextBinding
 import com.example.yana.fakername.fragmentsViewModel.AddTextViewModel
 import com.example.yana.fakername.prefs.SharedPreferenceFaker
 import com.example.yana.fakername.ui.MainActivity
+import com.example.yana.fakername.ui.SelectScreenActivity
 import com.example.yana.fakername.utils.cleanLaunchActivity
 import com.example.yana.fakername.utils.setSafeOnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -37,7 +38,7 @@ class AddTextFragment: Fragment() {
         onCheckboxClicked()
         setupListeners()
         viewModel.eventAuth.observe(viewLifecycleOwner, {
-            if (it)requireContext().cleanLaunchActivity<MainActivity>()
+            if (it)requireContext().cleanLaunchActivity<SelectScreenActivity>()
         })
     }
 

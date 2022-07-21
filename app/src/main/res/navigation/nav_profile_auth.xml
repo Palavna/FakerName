@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_profile_auth"
+    app:startDestination="@id/privateCabinetFragment3">
+
+    <fragment
+        android:id="@+id/privateCabinetFragment3"
+        android:name="com.example.yana.fakername.fragments.PrivateCabinetFragment"
+        android:label="PrivateCabinetFragment" />
+</navigation>

@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.yana.fakername.R
 import com.example.yana.fakername.databinding.FragmentRegistrationBinding
 import com.example.yana.fakername.fragmentsViewModel.RegistrationViewModel
 import com.example.yana.fakername.ui.MainActivity
+import com.example.yana.fakername.ui.SelectScreenActivity
 import com.example.yana.fakername.utils.changeFragment
 import com.example.yana.fakername.utils.cleanLaunchActivity
 import com.example.yana.fakername.utils.setSafeOnClickListener
@@ -35,7 +37,7 @@ class RegistrationFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
         viewModel.eventAuth.observe(viewLifecycleOwner, {
-            if (it)requireContext().cleanLaunchActivity<MainActivity>()
+            if (it)requireContext().cleanLaunchActivity<SelectScreenActivity>()
         })
     }
 
@@ -48,7 +50,7 @@ class RegistrationFragment: Fragment() {
             }
         }
         binding.btnRegistrationReg.setSafeOnClickListener {
-            (requireActivity() as MainActivity).changeFragment(RegisterNameFragment(), true)
+            findNavController().navigate(R.id.action_to_registration_fragment)
         }
 
         binding.forgotPass.setSafeOnClickListener{

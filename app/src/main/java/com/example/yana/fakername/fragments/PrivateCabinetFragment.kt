@@ -14,6 +14,7 @@ import com.example.yana.fakername.databinding.FragmentPrivateCabinetBinding
 import com.example.yana.fakername.fragmentsViewModel.PrivateCabinetViewModel
 import com.example.yana.fakername.ui.CastomViewCallback
 import com.example.yana.fakername.ui.MainActivity
+import com.example.yana.fakername.ui.SelectScreenActivity
 import com.example.yana.fakername.utils.cleanLaunchActivity
 import com.example.yana.fakername.utils.setSafeOnClickListener
 import kotlinx.coroutines.flow.collect
@@ -39,7 +40,7 @@ class PrivateCabinetFragment: Fragment(), CastomViewCallback, DocumentListener {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
         viewModel.eventAuth.observe(viewLifecycleOwner, {
-            if (it)requireContext().cleanLaunchActivity<MainActivity>()
+            if (it)requireContext().cleanLaunchActivity<SelectScreenActivity>()
         })
 
 //        binding.recyclerCom.adapter = adapter
