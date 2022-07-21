@@ -1,16 +1,16 @@
 package com.example.yana.fakername.ui
 
 import android.os.Bundle
-import android.view.View
+import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.yana.fakername.R
 import com.example.yana.fakername.databinding.ActivityMainBinding
-import com.example.yana.fakername.fragments.*
 import com.example.yana.fakername.fragmentsViewModel.MainViewModel
 import com.example.yana.fakername.prefs.SharedPreferenceFaker
+import com.example.yana.fakername.utils.NavigationBottomBarSectionsStateKeeperWorkaround
 import com.example.yana.fakername.utils.setupWithNavController
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -18,68 +18,102 @@ class MainActivity : AppCompatActivity(), FragmentCallBack {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModel()
-    lateinit var navController: NavController
+
+    private val navSectionsStateKeeper by lazy {
+        NavigationBottomBarSectionsStateKeeperWorkaround(
+            activity = this,
+            navHostContainerID = R.id.container,
+            navGraphIds = listOf(
+                R.navigation.nav_main,
+                R.navigation.nav_about,
+                R.navigation.nav_add,
+                R.navigation.nav_about_work,
+                R.navigation.nav_profile
+            ),
+            bottomNavigationViewID = R.id.bottomNav
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        navSectionsStateKeeper.onCreate(savedInstanceState)
+    }
 
-        setupFrameLayout()
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        navSectionsStateKeeper.onRestoreInstanceState(savedInstanceState)
+    }
+
+    override fun onSupportNavigateUp() =
+        navSectionsStateKeeper.onSupportNavigateUp()
+
+    override fun onBackPressed() {
+        if (!navSectionsStateKeeper.onSupportNavigateUp())
+            super.onBackPressed()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
     }
 
 
-    private fun setupFrameLayout() {
-
-        if (SharedPreferenceFaker.token.isNotEmpty())
-            binding.bottomNav.inflateMenu(R.menu.menu_bottom_auth)
-        else binding.bottomNav.inflateMenu(R.menu.menu_bottom)
-
-
-        val navGraphIds = listOf(
-            R.navigation.nav_main,
-            R.navigation.nav_about,
-            R.navigation.nav_add,
-            R.navigation.nav_about_work,
-            R.navigation.nav_profile
-        )
-
-        binding.bottomNav.setupWithNavController(
-            navGraphIds = navGraphIds,
-            fragmentManager = supportFragmentManager,
-            containerId = R.id.container,
-            intent = intent
-        ).observe(this) {
-            navController = it
-            (navController as NavHostController).enableOnBackPressed(true)
-            navController.addOnDestinationChangedListener { _, destination, _ ->
-//                if (flag) {
-//                    binding.navView.findViewById<View>(R.id.navigation_new_requests).performClick()
-//                    flag = false
-//                } else {
-//                    if (destination.label == getString(R.string.main))
-//                        finish()
+//    private fun setupFrameLayout(savedInstanceState: Bundle?) {
+//        if (SharedPreferenceFaker.token.isNotEmpty())
+//            binding.bottomNav.inflateMenu(R.menu.menu_bottom_auth)
+//        else binding.bottomNav.inflateMenu(R.menu.menu_bottom)
+//
+//        if (savedInstanceState == null) {
+//            val navGraphIds = listOf(
+//                R.navigation.nav_main,
+//                R.navigation.nav_about,
+//                R.navigation.nav_add,
+//                R.navigation.nav_about_work,
+//                R.navigation.nav_profile
+//            )
+//            binding.bottomNav.setupWithNavController(
+//                navGraphIds = navGraphIds,
+//                fragmentManager = supportFragmentManager,
+//                containerId = R.id.container,
+//                intent = intent
+//            ).observe(this) {
+//                viewModel.navController = it
+//                (viewModel.navController as NavHostController).enableOnBackPressed(true)
+//                viewModel.navController.addOnDestinationChangedListener { _, destination, _ ->
+////                if (flag) {
+////                    binding.navView.findViewById<View>(R.id.navigation_new_requests).performClick()
+////                    flag = false
+////                } else {
+////                    if (destination.label == getString(R.string.main))
+////                        finish()
+////                }
 //                }
-            }
-        }
-//        binding.bottomNav.selectedItemId = R.id.nav_main
-//        binding.bottomNav.setOnItemSelectedListener {
-//            when (it.itemId) {
-//                R.id.main -> changeFragment(MainFragment())
-//                R.id.about -> changeFragment(AboutFragment())
-//                R.id.works -> changeFragment(WorksFragment())
-//                R.id.addText -> {
-//                    if (SharedPreferenceFaker.token.isNotEmpty())
-//                        changeFragment(DataAddFragment())
-//                    else changeFragment(RegistrationFragment())
-//                }
-////                R.id.registration -> changeFragment(RegistrationFragment())
-//                R.id.profile -> changeFragment(PrivateCabinetFragment())
+////            savedInstanceState?.getInt("tab", R.id.nav_main)?.let {
+////                binding.bottomNav.selectedItemId = it
+////            }
 //            }
-//            true
 //        }
-        binding.bottomNav.selectedItemId = R.id.main
-    }
+//
+//
+////        binding.bottomNav.selectedItemId = R.id.nav_main
+////        binding.bottomNav.setOnItemSelectedListener {
+////            when (it.itemId) {
+////                R.id.main -> changeFragment(MainFragment())
+////                R.id.about -> changeFragment(AboutFragment())
+////                R.id.works -> changeFragment(WorksFragment())
+////                R.id.addText -> {
+////                    if (SharedPreferenceFaker.token.isNotEmpty())
+////                        changeFragment(DataAddFragment())
+////                    else changeFragment(RegistrationFragment())
+////                }
+//////                R.id.registration -> changeFragment(RegistrationFragment())
+////                R.id.profile -> changeFragment(PrivateCabinetFragment())
+////            }
+////            true
+////        }
+////        binding.bottomNav.selectedItemId = R.id.main
+//    }
 
     fun changeFragment(fragment: Fragment, isNeedBackStack: Boolean = false) {
         val manager = supportFragmentManager.beginTransaction()

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
 import com.example.yana.fakername.dataClass.Countries
 import com.example.yana.fakername.repository.DocumentRepository
 import com.example.yana.fakername.repository.FakerRepository
@@ -16,6 +17,9 @@ class MainViewModel(val repository: FakerRepository, val repos: SearchRepository
     init {
         loadCountriesId()
     }
+
+    lateinit var navController: NavController
+
 
     val countries = MutableLiveData <List<Countries>?>()
     val eventAuth = SingleLiveEvent<Boolean>()
