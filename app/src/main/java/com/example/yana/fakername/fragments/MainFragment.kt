@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.yana.fakername.R
 import com.example.yana.fakername.adapters.SpinnerAdapter
 import com.example.yana.fakername.dataClass.Countries
@@ -21,7 +22,7 @@ import com.example.yana.fakername.utils.hideKeyboard
 import com.example.yana.fakername.utils.setSafeOnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainFragment: Fragment(R.layout.fragment_main) {
+class MainFragment : Fragment(R.layout.fragment_main) {
 
     private lateinit var binding: FragmentMainBinding
     private val viewModel: MainViewModel by viewModel()
@@ -42,7 +43,11 @@ class MainFragment: Fragment(R.layout.fragment_main) {
         setupListeners()
 
         viewModel.countries.observe(viewLifecycleOwner, {
-            val adapter = SpinnerAdapter(requireContext(), R.layout.item_spinner, it?.toTypedArray() ?: emptyArray())
+            val adapter = SpinnerAdapter(
+                requireContext(),
+                R.layout.item_spinner,
+                it?.toTypedArray() ?: emptyArray()
+            )
 
             binding.spinner.adapter = adapter
         })
@@ -51,13 +56,17 @@ class MainFragment: Fragment(R.layout.fragment_main) {
 
 
     private fun doSomething(search: EditText) {
-        search.setOnEditorActionListener(TextView.OnEditorActionListener{ _, actionId, _ ->
+        search.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
 
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                if (isMainValid()){
-                        hideKeyboard()
-                    (requireActivity() as MainActivity).changeFragment(DetailsFragment.create(binding.etFaker.text.toString(),
-                        (binding.spinner.selectedItem as? Countries)?.id ?: -1 ), true)
+                if (isMainValid()) {
+                    hideKeyboard()
+                    (requireActivity() as MainActivity).changeFragment(
+                        DetailsFragment.create(
+                            binding.etFaker.text.toString(),
+                            (binding.spinner.selectedItem as? Countries)?.id ?: -1
+                        ), true
+                    )
                 }
 
                 return@OnEditorActionListener true
@@ -67,32 +76,35 @@ class MainFragment: Fragment(R.layout.fragment_main) {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    fun setupListeners(){
+    fun setupListeners() {
         binding.btnSearch.setSafeOnClickListener {
-            if (isMainValid()){
-                (requireActivity() as MainActivity).changeFragment(DetailsFragment.create(binding.etFaker.text.toString(),
-                    (binding.spinner.selectedItem as? Countries)?.id ?: -1 ), true)
-            }
+//            if (isMainValid()){
+//                (requireActivity() as MainActivity).changeFragment(DetailsFragment.create(binding.etFaker.text.toString(),
+//                    (binding.spinner.selectedItem as? Countries)?.id ?: -1 ), true)
+//            }
+
+            findNavController().navigate(R.id.detailsFragment2)
         }
 
         binding.spinner.setOnTouchListener { _, _ ->
             hideKeyboard()
-            return@setOnTouchListener false }
+            return@setOnTouchListener false
+        }
     }
 
-    fun isMainValid(): Boolean{
+    fun isMainValid(): Boolean {
         var isValid = true
         var missiedFileds = mutableListOf<String>()
         if ((binding.spinner.selectedItem as? Countries)?.id == -1) {
             missiedFileds.add("выберите страну")
             isValid = false
         }
-        if (binding.etFaker.text.toString().isEmpty())  {
+        if (binding.etFaker.text.toString().isEmpty()) {
             binding.etFaker.error = "введите ПИН"
             missiedFileds.add("введите ПИН")
             isValid = false
         }
-        if (!isValid){
+        if (!isValid) {
             val text = resources.getQuantityString(R.plurals.empty_field_msg, missiedFileds.size)
                 .plus(missiedFileds.joinToString(separator = ", "))
             Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()
