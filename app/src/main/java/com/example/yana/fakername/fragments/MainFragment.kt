@@ -61,12 +61,12 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 if (isMainValid()) {
                     hideKeyboard()
-                    (requireActivity() as MainActivity).changeFragment(
-                        DetailsFragment.create(
-                            binding.etFaker.text.toString(),
-                            (binding.spinner.selectedItem as? Countries)?.id ?: -1
-                        ), true
-                    )
+//                    (requireActivity() as MainActivity).changeFragment(
+//                        DetailsFragment.create(
+//                            binding.etFaker.text.toString(),
+//                            (binding.spinner.selectedItem as? Countries)?.id ?: -1
+//                        ), true
+//                    )
                 }
 
                 return@OnEditorActionListener true
@@ -78,12 +78,12 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     @SuppressLint("ClickableViewAccessibility")
     fun setupListeners() {
         binding.btnSearch.setSafeOnClickListener {
-//            if (isMainValid()){
-//                (requireActivity() as MainActivity).changeFragment(DetailsFragment.create(binding.etFaker.text.toString(),
-//                    (binding.spinner.selectedItem as? Countries)?.id ?: -1 ), true)
-//            }
-
-            findNavController().navigate(R.id.detailsFragment2)
+            if (isMainValid()) {
+                val directions =
+                    MainFragmentDirections.toDetailsFragment(binding.etFaker.text.toString())
+                directions.countryId = (binding.spinner.selectedItem as? Countries)?.id ?: -1
+                findNavController().navigate(directions)
+            }
         }
 
         binding.spinner.setOnTouchListener { _, _ ->

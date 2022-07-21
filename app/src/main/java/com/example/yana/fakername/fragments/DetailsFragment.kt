@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.yana.fakername.adapters.CommentListAdapter
@@ -25,11 +26,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsFragment() : Fragment(), DocumentListener {
 
-    private val countryId: Int
-        get() = arguments?.getInt(COUNTRYID) ?: -1
-
-    private val query: String
-        get() = arguments?.getString(QUERY) ?: ""
+    private val args by navArgs<DetailsFragmentArgs>()
 
     private lateinit var binding: FragmentDetailsBinding
     private val viewModel: DetailsViewModel by viewModel()
@@ -51,28 +48,34 @@ class DetailsFragment() : Fragment(), DocumentListener {
         binding.groupTv.isVisible = false
 
 
-        binding.recyclerList.addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
+        binding.recyclerList.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                LinearLayoutManager.VERTICAL
+            )
+        )
         binding.recyclerList.adapter = adapterList
 
-        binding.btnSaveEditCom.setSafeOnClickListener{
-            if (isInnValid()){
+        binding.btnSaveEditCom.setSafeOnClickListener {
+            if (isInnValid()) {
                 viewModel.createDocument(
-                    countryId, query,
+                    args.countryId, args.query,
                     binding.etAddTextEditCom.text.toString(),
-                    binding.positive.isChecked)
+                    binding.positive.isChecked
+                )
                 binding.etAddTextEditCom.setText("")
             }
 
-            viewModel.progress.observe(this, {
+            viewModel.progress.observe(viewLifecycleOwner, {
                 binding.progress.isVisible = it
             })
         }
 
         lifecycleScope.launch {
-            viewModel.doc(query, countryId).collect { adapter.submitData(it) }
+            viewModel.doc(args.query, args.countryId).collect { adapter.submitData(it) }
         }
 
-        viewModel.search(query, countryId)
+        viewModel.search(args.query, args.countryId)
         viewModel.saveDoc.observe(viewLifecycleOwner, {
             adapterList.update(it?.comments ?: emptyList())
         }
@@ -96,33 +99,17 @@ class DetailsFragment() : Fragment(), DocumentListener {
         var isValid = true
         var missiedFileds = mutableListOf<String>()
 
-        if (binding.etAddTextEditCom.text.toString().length<10) {
+        if (binding.etAddTextEditCom.text.toString().length < 10) {
             binding.etAddTextEditCom.error = "оставьте комментарий"
             missiedFileds.add("оставьте комментарий")
             isValid = false
         }
-        if (!binding.positive.isChecked && !binding.negative.isChecked){
+        if (!binding.positive.isChecked && !binding.negative.isChecked) {
             missiedFileds.add("radio button")
             isValid = false
         }
 
         return isValid
-    }
-
-
-    companion object {
-
-        private const val COUNTRYID = "COUNTRYID"
-        private const val QUERY = "QUERY"
-
-        fun create(query: String, id: Int): DetailsFragment {
-            val fragment = DetailsFragment()
-            val bundle = Bundle()
-            bundle.putInt(COUNTRYID, id)
-            bundle.putString(QUERY, query)
-            fragment.arguments = bundle
-            return fragment
-        }
     }
 
     override fun editDocument(id: Int) {
