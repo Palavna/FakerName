@@ -49,6 +49,7 @@ class MainFragment: Fragment(R.layout.fragment_main) {
         doSomething(binding.etFaker)
     }
 
+
     private fun doSomething(search: EditText) {
         search.setOnEditorActionListener(TextView.OnEditorActionListener{ _, actionId, _ ->
 
