@@ -50,11 +50,11 @@ class RegistrationFragment: Fragment() {
             }
         }
         binding.btnRegistrationReg.setSafeOnClickListener {
-            findNavController().navigate(R.id.action_to_registration_fragment)
+            findNavController().navigate(R.id.toRegistrationFragment)
         }
 
         binding.forgotPass.setSafeOnClickListener{
-            (requireActivity() as MainActivity).changeFragment(ForgotPasswordFragment(), true)
+            findNavController().navigate(R.id.toForgotPasswordFragment)
         }
     }
     fun isEmailValid(email: String): Boolean {

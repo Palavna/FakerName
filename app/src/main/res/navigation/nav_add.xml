@@ -10,12 +10,19 @@
         android:name="com.example.yana.fakername.fragments.RegistrationFragment"
         android:label="RegistrationFragment">
         <action
-            android:id="@+id/action_to_registration_fragment"
+            android:id="@+id/toRegistrationFragment"
             app:destination="@id/registerNameFragment2" />
+        <action
+            android:id="@+id/toForgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment2" />
     </fragment>
     <fragment
         android:id="@+id/registerNameFragment2"
         android:name="com.example.yana.fakername.fragments.RegisterNameFragment"
         android:label="RegisterNameFragment" />
+    <fragment
+        android:id="@+id/forgotPasswordFragment2"
+        android:name="com.example.yana.fakername.fragments.ForgotPasswordFragment"
+        android:label="ForgotPasswordFragment" />
 
 </navigation>

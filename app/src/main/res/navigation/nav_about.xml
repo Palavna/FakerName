@@ -2,10 +2,9 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_about"
-    app:startDestination="@id/aboutFragment3">
-
+    app:startDestination="@id/aboutFragment2">
     <fragment
-        android:id="@+id/aboutFragment3"
+        android:id="@+id/aboutFragment2"
         android:name="com.example.yana.fakername.fragments.AboutFragment"
         android:label="AboutFragment" />
 </navigation>

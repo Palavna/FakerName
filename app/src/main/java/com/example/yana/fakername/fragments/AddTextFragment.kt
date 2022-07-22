@@ -58,7 +58,7 @@ class AddTextFragment: Fragment() {
             }
         }
         binding.zabiliPass.setSafeOnClickListener{
-            Toast.makeText(requireContext(), "forgotPassword", Toast.LENGTH_LONG).show()
+            findNavController().navigate(R.id.toForgotPasswordFragment3)
         }
     }
         fun isEmailValid(email: String): Boolean {

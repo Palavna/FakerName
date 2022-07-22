@@ -17,7 +17,6 @@ import com.example.yana.fakername.dataClass.Countries
 import com.example.yana.fakername.databinding.FragmentMainBinding
 import com.example.yana.fakername.fragmentsViewModel.MainViewModel
 import com.example.yana.fakername.ui.FragmentCallBack
-import com.example.yana.fakername.ui.MainActivity
 import com.example.yana.fakername.utils.hideKeyboard
 import com.example.yana.fakername.utils.setSafeOnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel

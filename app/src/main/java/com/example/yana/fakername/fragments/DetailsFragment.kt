@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.yana.fakername.adapters.CommentListAdapter
 import com.example.yana.fakername.adapters.DocumentListener
 import com.example.yana.fakername.adapters.SearchAdapter
-import com.example.yana.fakername.dataClass.Countries
-import com.example.yana.fakername.dataClass.DocumentsPage
 import com.example.yana.fakername.databinding.FragmentDetailsBinding
 import com.example.yana.fakername.fragmentsViewModel.DetailsViewModel
 import com.example.yana.fakername.ui.MainActivity

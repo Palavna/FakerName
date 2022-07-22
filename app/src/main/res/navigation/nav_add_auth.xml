@@ -8,4 +8,26 @@
         android:id="@+id/dataAddFragment"
         android:name="com.example.yana.fakername.fragments.DataAddFragment"
         android:label="DataAddFragment" />
+    <fragment
+        android:id="@+id/addTextFragment2"
+        android:name="com.example.yana.fakername.fragments.AddTextFragment"
+        android:label="AddTextFragment" >
+        <action
+            android:id="@+id/toDataAddFragment"
+            app:destination="@id/dataAddFragment" />
+        <action
+            android:id="@+id/toForgotPasswordFragment3"
+            app:destination="@id/forgotPasswordFragment3" />
+        <action
+            android:id="@+id/toRegisterNameFragment3"
+            app:destination="@id/registerNameFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgotPasswordFragment3"
+        android:name="com.example.yana.fakername.fragments.ForgotPasswordFragment"
+        android:label="ForgotPasswordFragment" />
+    <fragment
+        android:id="@+id/registerNameFragment3"
+        android:name="com.example.yana.fakername.fragments.RegisterNameFragment"
+        android:label="RegisterNameFragment" />
 </navigation>
