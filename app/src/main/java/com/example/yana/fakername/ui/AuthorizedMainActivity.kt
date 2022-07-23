@@ -27,5 +27,6 @@ class AuthorizedMainActivity : BaseMainActivity(), FragmentCallBack {
     }
 
     override fun openProfile() {
+        binding.bottomNav.selectedItemId = R.id.nav_profile_auth
     }
 }
