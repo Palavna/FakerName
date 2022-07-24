@@ -1,16 +1,22 @@
 package com.example.yana.fakername.dataClass
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
+
+@Entity
 data class SearchModel(
 
-    val id: Int,
-    val inn: String?,
-    val passport: String?,
-    val description: String?,
-    val country_id: Int,
-    val user_id: Int,
-    val created_at: String,
-    val updated_at: String,
-    val positiveCount: Int,
-    val negativeCount: Int,
-    val country: Countries
+    @PrimaryKey
+    @SerializedName("id") val id: Int,
+    @SerializedName("inn") val inn: String?,
+    @SerializedName("passport") val passport: String?,
+    @SerializedName("description") val description: String?,
+    @SerializedName("country_id") val country_id: Int?,
+    @SerializedName("user_id") val user_id: Int?,
+    @SerializedName("created_at") val created_at: String?,
+    @SerializedName("updated_at") val updated_at: String?,
+    @SerializedName("positiveCount") val positiveCount: Int?,
+    @SerializedName("negativeCount") val negativeCount: Int?,
+    @SerializedName("countries") val countries: Countries?
 )

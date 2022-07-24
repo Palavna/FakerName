@@ -2,12 +2,13 @@ package com.example.yana.fakername.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.yana.fakername.dataClass.Countries
-import com.example.yana.fakername.dataClass.DocumentsPage
-import com.example.yana.fakername.dataClass.Profile
-import com.example.yana.fakername.dataClass.SearchModel
+import androidx.room.TypeConverters
+import com.example.yana.fakername.dataClass.*
+import com.example.yana.fakername.utils.TypeConventers
 
-@Database(entities = [Countries::class, DocumentsPage::class, Profile::class], version = 1)
+@Database(entities = [Countries::class, DocumentsPage::class, Profile::class, Search::class,
+                     SearchModel::class], version = 1)
+@TypeConverters(TypeConventers::class)
 abstract class FakerAppDataBase: RoomDatabase() {
     abstract fun getFakerDao(): FakerNameDao
 }

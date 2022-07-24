@@ -84,7 +84,7 @@ class DetailsFragment() : Fragment(), DocumentListener {
 
         viewModel.userDoc.observe(viewLifecycleOwner, {
             binding.telephoneNam.text = it?.inn
-            binding.country.text = it?.country?.name
+            binding.country.text = it?.countries?.name
             binding.description.text = it?.description.getTextIsNotEmpty()
             binding.positiveTv.text = it?.positiveCount.toString()
             binding.negativeTv.text = it?.negativeCount.toString()
