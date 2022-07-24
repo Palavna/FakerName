@@ -43,7 +43,7 @@ class AboutFragment: Fragment(), DocumentListener {
     }
 
     override fun editDocument(id: Int) {
-        (requireActivity() as MainActivity).changeFragment(EditCommentFragment(id), true)
+//        (requireActivity() as MainActivity).changeFragment(EditCommentFragment(id), true)
     }
 
 }

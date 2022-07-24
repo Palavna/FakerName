@@ -13,7 +13,7 @@ import com.example.yana.fakername.fragmentsViewModel.EditCommentViewModel
 import com.example.yana.fakername.fragmentsViewModel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class EditCommentFragment(id: Int) : Fragment() {
+class EditCommentFragment() : Fragment() {
 
     private lateinit var binding: FragmentEditCommentBinding
     private val viewModel: EditCommentViewModel by viewModel()

@@ -3,9 +3,7 @@ package com.example.yana.fakername.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.example.yana.fakername.R
 import com.example.yana.fakername.data.StatusMessageEnum
 import com.example.yana.fakername.dataClass.CommentsUser
 import com.example.yana.fakername.databinding.ItemListRecyclerBinding

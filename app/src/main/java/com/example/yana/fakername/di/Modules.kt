@@ -52,7 +52,7 @@ val repositoryModel = module {
     single <FakerRepository> { FakerRepositoryImpl(get(), get()) }
     single <AuthRepository> { AuthRepositoryImpl(get()) }
     single <DocumentRepository> { DocumentRepositoryImpl(get(), get()) }
-    single <ProfileCabinetRepository> { ProfileCabinetRepositoryImpl(get()) }
+    single <ProfileCabinetRepository> { ProfileCabinetRepositoryImpl(get(), get()) }
     single <CreateCommentRepository> { CreateCommentRepositoryImpl(get()) }
     single <SearchRepository> { SearchRepositoryImpl(get()) }
 }

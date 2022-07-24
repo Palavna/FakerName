@@ -9,15 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.yana.fakername.adapters.DocumentListener
 import com.example.yana.fakername.adapters.DocumentsAdapter
-import com.example.yana.fakername.dataClass.DocumentsPage
 import com.example.yana.fakername.databinding.FragmentPrivateCabinetBinding
 import com.example.yana.fakername.fragmentsViewModel.PrivateCabinetViewModel
 import com.example.yana.fakername.ui.CastomViewCallback
-import com.example.yana.fakername.ui.MainActivity
 import com.example.yana.fakername.ui.SelectScreenActivity
 import com.example.yana.fakername.utils.cleanLaunchActivity
 import com.example.yana.fakername.utils.setSafeOnClickListener
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -49,7 +46,7 @@ class PrivateCabinetFragment: Fragment(), CastomViewCallback, DocumentListener {
             viewModel.doc().collect { adapter.submitData(it) }
         }
 
-        viewModel.progress.observe(this, {
+        viewModel.progress.observe(viewLifecycleOwner, {
             binding.progress.isVisible = it
         })
 
@@ -75,6 +72,6 @@ class PrivateCabinetFragment: Fragment(), CastomViewCallback, DocumentListener {
     }
 
     override fun editDocument(id: Int) {
-        (requireActivity() as MainActivity).changeFragment(EditCommentFragment(id), true)
+//        (requireActivity() as MainActivity).changeFragment(EditCommentFragment(id), true)
     }
 }

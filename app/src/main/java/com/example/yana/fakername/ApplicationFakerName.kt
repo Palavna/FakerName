@@ -1,6 +1,8 @@
 package com.example.yana.fakername
 
 import android.app.Application
+import androidx.room.Room
+import com.example.yana.fakername.db.FakerAppDataBase
 import com.example.yana.fakername.di.fakerModules
 import com.example.yana.fakername.prefs.SharedPreferenceFaker
 import org.koin.android.ext.koin.androidContext
@@ -15,5 +17,12 @@ class ApplicationFakerName: Application() {
             fakerModules
         }
         SharedPreferenceFaker.init(this)
+
+        DB = Room.databaseBuilder(this, FakerAppDataBase::class.java, "fakerNameDB")
+            .allowMainThreadQueries()
+            .build()
+    }
+    companion object {
+        var DB: FakerAppDataBase? = null
     }
 }

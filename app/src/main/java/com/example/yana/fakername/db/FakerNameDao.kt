@@ -7,6 +7,7 @@ import androidx.room.Query
 import com.example.yana.fakername.dataClass.Countries
 import com.example.yana.fakername.dataClass.Documents
 import com.example.yana.fakername.dataClass.DocumentsPage
+import com.example.yana.fakername.dataClass.Profile
 
 @Dao
 interface FakerNameDao {
@@ -20,12 +21,12 @@ interface FakerNameDao {
     @Query("DELETE FROM countries")
     fun deleteAllLoadCountries()
 
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    fun insertDocuments(documents: Documents)
-//
-//    @Query("SELECT * FROM documentspage")
-//    fun getDocuments(): Documents
-//
-//    @Query("DELETE FROM documentspage")
-//    fun deleteAllDocuments()
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertProfile(profile: Profile)
+
+    @Query("SELECT * FROM profile")
+    fun getProfile(): Profile
+
+    @Query("DELETE FROM profile")
+    fun deleteAllProfile()
 }

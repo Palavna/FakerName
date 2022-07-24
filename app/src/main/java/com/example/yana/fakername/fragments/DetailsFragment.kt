@@ -7,14 +7,17 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.yana.fakername.R
 import com.example.yana.fakername.adapters.CommentListAdapter
 import com.example.yana.fakername.adapters.DocumentListener
 import com.example.yana.fakername.adapters.SearchAdapter
 import com.example.yana.fakername.databinding.FragmentDetailsBinding
 import com.example.yana.fakername.fragmentsViewModel.DetailsViewModel
+import com.example.yana.fakername.ui.AuthorizedMainActivity
 import com.example.yana.fakername.ui.MainActivity
 import com.example.yana.fakername.utils.getTextIsNotEmpty
 import com.example.yana.fakername.utils.setSafeOnClickListener
@@ -111,6 +114,6 @@ class DetailsFragment() : Fragment(), DocumentListener {
     }
 
     override fun editDocument(id: Int) {
-        (requireActivity() as MainActivity).changeFragment(EditCommentFragment(id), true)
+        findNavController().navigate(R.id.action_detailsFragment2_to_editCommentFragment2)
     }
 }
