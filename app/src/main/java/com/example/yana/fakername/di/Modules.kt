@@ -30,14 +30,14 @@ val networkModule = module {
     }
 }
 val viewModelModule = module {
-    viewModel { MainViewModel(get(), get(),get()) }
+    viewModel { MainViewModel(get(), get(), get()) }
     viewModel { RegistrationViewModel(get(), get()) }
     viewModel { DataAddViewModel(get(), get(), get()) }
-    viewModel { PrivateCabinetViewModel(get(), get(),get()) }
+    viewModel { PrivateCabinetViewModel(get(), get(), get()) }
     viewModel { AddTextViewModel(get(), get()) }
     viewModel { RegisterNameViewModel(get(), get()) }
     viewModel { AboutViewModel(get(), get()) }
-    viewModel { DetailsViewModel(get(), get(), get()) }
+    viewModel { DetailsViewModel(get(), get(), get(), get(), get()) }
 
 }
 val iteractorModules = module {
@@ -49,17 +49,18 @@ val iteractorModules = module {
     single<SearchIteractor> { SearchIteractorImpl(get()) }
 }
 val repositoryModel = module {
-    single <FakerRepository> { FakerRepositoryImpl(get(), get()) }
-    single <AuthRepository> { AuthRepositoryImpl(get()) }
-    single <DocumentRepository> { DocumentRepositoryImpl(get(), get()) }
-    single <ProfileCabinetRepository> { ProfileCabinetRepositoryImpl(get(), get()) }
-    single <CreateCommentRepository> { CreateCommentRepositoryImpl(get()) }
-    single <SearchRepository> { SearchRepositoryImpl(get(), get()) }
+    single<FakerRepository> { FakerRepositoryImpl(get(), get()) }
+    single<AuthRepository> { AuthRepositoryImpl(get()) }
+    single<DocumentRepository> { DocumentRepositoryImpl(get(), get()) }
+    single<ProfileCabinetRepository> { ProfileCabinetRepositoryImpl(get(), get()) }
+    single<CreateCommentRepository> { CreateCommentRepositoryImpl(get()) }
+    single<SearchRepository> { SearchRepositoryImpl(get(), get()) }
 }
 val dbModule = module {
-    single { Room.databaseBuilder(get(), FakerAppDataBase::class.java,"fakerName")
-        .allowMainThreadQueries()
-        .build()
+    single {
+        Room.databaseBuilder(get(), FakerAppDataBase::class.java, "fakerName")
+            .allowMainThreadQueries()
+            .build()
     }
-    single { get<FakerAppDataBase>().getFakerDao()}
+    single { get<FakerAppDataBase>().getFakerDao() }
 }

@@ -31,8 +31,8 @@ interface FakerNameDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSearch(searchModel: List<SearchModel>? )
 
-    @Query("SELECT * FROM search WHERE idUser=:id")
-    fun getSearch(id:String): SearchModel?
+//    @Query("SELECT * FROM search WHERE idUser=:id")
+//    fun getSearch(id:String): SearchModel?
 
     @Query("SELECT * FROM searchModel WHERE `query`=:id")
     fun getSearchPaging(id:String): PagingSource<Int, SearchModel>

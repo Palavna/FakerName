@@ -18,16 +18,16 @@ class SearchRepositoryImpl(private val iteractor: SearchIteractor, private val f
         }catch (e:Exception){
             null
         }
-        val idU = "countryid=$id&query=$text"
-        result?.idUser = idU
-        if (result != null){
-            fakerDao.insertSearch(result)
-        }
-        val newResult = fakerDao.getSearch(idU)
-       Log.d("vbnmbnbn","vvvvvvvvv")
-        return newResult
+//        val idU = "countryid=$id&query=$text"
+//        result?.idUser = idU
+//        if (result != null){
+//            fakerDao.insertSearch(result)
+//        }
+//        val newResult = fakerDao.getSearch(idU)
+//       Log.d("vbnmbnbn","vvvvvvvvv")
+//        return newResult
 
-
+return null
     }
 
 }

@@ -52,7 +52,7 @@ class DetailsFragment() : Fragment(), DocumentListener {
                 LinearLayoutManager.VERTICAL
             )
         )
-        binding.recyclerList.adapter = adapterList
+        binding.recyclerList.adapter = adapter
 
         binding.btnSaveEditCom.setSafeOnClickListener {
             if (isInnValid()) {
@@ -85,8 +85,8 @@ class DetailsFragment() : Fragment(), DocumentListener {
             binding.description.text = it?.description.getTextIsNotEmpty()
             binding.positiveTv.text = it?.positiveCount.toString()
             binding.negativeTv.text = it?.negativeCount.toString()
-            binding.groupTv.isVisible = it != null
-            binding.tvEmptiMessege.isVisible = it == null
+//            binding.groupTv.isVisible = it != null
+//            binding.tvEmptiMessege.isVisible = it == null
 
         }
         )

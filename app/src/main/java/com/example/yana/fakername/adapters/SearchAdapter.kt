@@ -25,16 +25,19 @@ class SearchVH(private val binding: ItemListRecyclerBinding, private val listene
    RecyclerView.ViewHolder(binding.root){
 
     fun bind(documents: SearchModel){
-//        binding.inn.text = documents.inn ?: documents.passport
-//        binding.comment.text = documents.country.name
-//
-//        binding.data.text = documents.description
-//        binding.positiveTv.text = documents.positiveCount.toString()
-//        binding.negativeTv.text = documents.negativeCount.toString()
 
-//        binding.edit.setOnClickListener {
-//            listener.editDocument(documents.id)
-//        }
+            binding.commentUser.text = documents.inn
+
+    //        binding.inn.text = documents.inn ?: documents.passport
+    //        binding.comment.text = documents.country.name
+    //
+    //        binding.data.text = documents.description
+    //        binding.positiveTv.text = documents.positiveCount.toString()
+    //        binding.negativeTv.text = documents.negativeCount.toString()
+    //
+    //        binding.edit.setOnClickListener {
+    //            listener.editDocument(documents.id)
+    //        }
     }
 
 

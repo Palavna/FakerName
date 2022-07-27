@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
+import androidx.paging.*
 import com.example.yana.fakername.dataClass.DocumentsUser
 import com.example.yana.fakername.dataClass.SearchModel
 import com.example.yana.fakername.db.FakerAppDataBase
@@ -20,10 +17,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class DetailsViewModel(private val repos: SearchRepository, private val reposUser: DocumentRepository,
-                       private val reposDoc: DocumentRepository, private val database: FakerAppDataBase,
-                       private val networkService: FakerService
-): ViewModel() {
+class DetailsViewModel(
+    private val repos: SearchRepository, private val reposUser: DocumentRepository,
+    private val reposDoc: DocumentRepository, private val database: FakerAppDataBase,
+    private val networkService: FakerService
+) : ViewModel() {
 
     val eventAuth = SingleLiveEvent<Boolean>()
     val saveDoc = MutableLiveData<DocumentsUser?>()
@@ -31,27 +29,32 @@ class DetailsViewModel(private val repos: SearchRepository, private val reposUse
     val progress = MutableLiveData(false)
 
 
+    @OptIn(ExperimentalPagingApi::class)
     fun doc(query: String, countryId: Int): Flow<PagingData<SearchModel>> {
-        val pagingSourceFactory = {database.getFakerDao().getSearchPaging("id=$countryId&query=$query")}
+        val pagingSourceFactory =
+            { database.getFakerDao().getSearchPaging("id=$countryId&query=$query") }
+
         return Pager(
-            config = PagingConfig(pageSize = 3, prefetchDistance = 5),
-            remoteMediator = { SearchSource(query, database, networkService, countryId ) },
+            config = PagingConfig(pageSize = 50, enablePlaceholders = false),
+            remoteMediator = SearchSource(
+                query, database, networkService, countryId
+            ),
             pagingSourceFactory = pagingSourceFactory
-            ){}.flow.cachedIn(viewModelScope)
+        ).flow
     }
 
-    fun search(text: String, id: Int?){
+    fun search(text: String, id: Int?) {
         viewModelScope.launch(Dispatchers.IO) {
             kotlin.runCatching {
                 progress.postValue(true)
-                val searchUser = repos.search(text,0,id)
+                val searchUser = repos.search(text, 0, id)
                 val user = searchUser?.data?.firstOrNull()
                 progress.postValue(true)
-                if (user?.id != null){
+                if (user?.id != null) {
                     val result = reposUser.documentsUser(user.id)
                     saveDoc.postValue(result)
                     progress.postValue(false)
-                }else {
+                } else {
                     Log.d("wwwwwwwww", "oooooooooo")
                 }
                 userDoc.postValue(user)
@@ -62,14 +65,15 @@ class DetailsViewModel(private val repos: SearchRepository, private val reposUse
             }
         }
     }
+
     fun createDocument(countryId: Int, passport: String, comment: String, positive: Boolean) {
         viewModelScope.launch {
             kotlin.runCatching {
                 progress.postValue(true)
-                val createCom = reposDoc.createDocument(countryId, passport, comment,positive)
+                val createCom = reposDoc.createDocument(countryId, passport, comment, positive)
                 eventAuth.postValue(createCom != null)
                 progress.postValue(true)
-                search(passport,countryId)
+                search(passport, countryId)
                 progress.postValue(false)
                 Log.d("dfghdfgh", "fghjfghjfg")
             }.onFailure {
