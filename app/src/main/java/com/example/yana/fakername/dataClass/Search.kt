@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class Search (
 
     @PrimaryKey
+    var idUser: String = "",
     val id: Int,
     val current_page: Int?,
     val last_page: Int?,

@@ -10,8 +10,8 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.yana.fakername.dataClass.DocumentsUser
 import com.example.yana.fakername.dataClass.SearchModel
-import com.example.yana.fakername.dataClass.ShowComment
-import com.example.yana.fakername.repository.CreateCommentRepository
+import com.example.yana.fakername.db.FakerAppDataBase
+import com.example.yana.fakername.network.FakerService
 import com.example.yana.fakername.repository.DocumentRepository
 import com.example.yana.fakername.repository.SearchRepository
 import com.example.yana.fakername.utils.SearchSource
@@ -21,7 +21,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class DetailsViewModel(private val repos: SearchRepository, private val reposUser: DocumentRepository,
-                       private val reposDoc: DocumentRepository): ViewModel() {
+                       private val reposDoc: DocumentRepository, private val database: FakerAppDataBase,
+                       private val networkService: FakerService
+): ViewModel() {
 
     val eventAuth = SingleLiveEvent<Boolean>()
     val saveDoc = MutableLiveData<DocumentsUser?>()
@@ -30,9 +32,12 @@ class DetailsViewModel(private val repos: SearchRepository, private val reposUse
 
 
     fun doc(query: String, countryId: Int): Flow<PagingData<SearchModel>> {
+        val pagingSourceFactory = {database.getFakerDao().getSearchPaging("id=$countryId&query=$query")}
         return Pager(
-            PagingConfig(pageSize = 3, prefetchDistance = 5),
-            pagingSourceFactory = { SearchSource(repos, query, countryId ) }).flow.cachedIn(viewModelScope)
+            config = PagingConfig(pageSize = 3, prefetchDistance = 5),
+            remoteMediator = { SearchSource(query, database, networkService, countryId ) },
+            pagingSourceFactory = pagingSourceFactory
+            ){}.flow.cachedIn(viewModelScope)
     }
 
     fun search(text: String, id: Int?){

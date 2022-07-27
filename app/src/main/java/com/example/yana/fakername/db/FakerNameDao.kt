@@ -1,5 +1,6 @@
 package com.example.yana.fakername.db
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -28,12 +29,15 @@ interface FakerNameDao {
     fun deleteAllProfile()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertSearch(search: Search)
+    fun insertSearch(searchModel: List<SearchModel>? )
 
-    @Query("SELECT * FROM search")
-    fun getSearch(): Search?
+    @Query("SELECT * FROM search WHERE idUser=:id")
+    fun getSearch(id:String): SearchModel?
 
-    @Query("DELETE FROM search")
+    @Query("SELECT * FROM searchModel WHERE `query`=:id")
+    fun getSearchPaging(id:String): PagingSource<Int, SearchModel>
+
+    @Query("DELETE FROM searchModel")
     fun deleteAllSearch()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -53,4 +57,31 @@ interface FakerNameDao {
 
     @Query("DELETE FROM countries")
     fun deleteAllCountry()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertDocumentsUser(documentsUser: DocumentsUser)
+
+    @Query("SELECT * FROM documentsUser ")
+    fun getDocumentsUser(): DocumentsUser?
+
+    @Query("DELETE FROM documentsUser")
+    fun deleteAllDocumentsUser()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertCommentsUser(commentsUser: CommentsUser)
+
+    @Query("SELECT * FROM commentsUser ")
+    fun getCommentsUser(): CommentsUser?
+
+    @Query("DELETE FROM commentsUser")
+    fun deleteAllCommentsUser()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertUser(user: User)
+
+    @Query("SELECT * FROM user ")
+    fun getUser(): User?
+
+    @Query("DELETE FROM user")
+    fun deleteAllUser()
 }

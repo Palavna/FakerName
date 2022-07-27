@@ -1,6 +1,7 @@
 package com.example.yana.fakername.repository
 
 import com.example.yana.fakername.dataClass.CreateDocument
+import com.example.yana.fakername.dataClass.Documents
 import com.example.yana.fakername.dataClass.DocumentsUser
 import com.example.yana.fakername.db.FakerNameDao
 import com.example.yana.fakername.network.DocumentIteractor
@@ -37,10 +38,10 @@ class DocumentRepositoryImpl(private val iteractor: DocumentIteractor, private v
 //            null
 //        }
 //        return if (result != null) {
-//            fakerDao.insertDocuments(result)
+//            fakerDao.insertDocumentsUser(result)
 //            result
 //        }else{
-//            fakerDao.getDocuments()
+//            fakerDao.getDocumentsUser()
 //        }
 //    }
 

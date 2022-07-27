@@ -58,7 +58,7 @@ interface FakerService {
     @GET("search")
     suspend fun search(
         @Query("text") text: String,
-        @Query("page") page: Int,
+        @Query("page") page: Int?,
         @Query("country_id") country_id: Int?
     ): Search?
 

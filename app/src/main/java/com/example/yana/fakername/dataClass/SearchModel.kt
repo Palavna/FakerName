@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName
 @Entity
 data class SearchModel(
 
+    val query: String,
     @PrimaryKey
     @SerializedName("id") val id: Int,
     @SerializedName("inn") val inn: String?,

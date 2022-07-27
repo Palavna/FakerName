@@ -17,11 +17,8 @@ import com.example.yana.fakername.adapters.DocumentListener
 import com.example.yana.fakername.adapters.SearchAdapter
 import com.example.yana.fakername.databinding.FragmentDetailsBinding
 import com.example.yana.fakername.fragmentsViewModel.DetailsViewModel
-import com.example.yana.fakername.ui.AuthorizedMainActivity
-import com.example.yana.fakername.ui.MainActivity
 import com.example.yana.fakername.utils.getTextIsNotEmpty
 import com.example.yana.fakername.utils.setSafeOnClickListener
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

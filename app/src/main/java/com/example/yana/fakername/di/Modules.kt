@@ -54,7 +54,7 @@ val repositoryModel = module {
     single <DocumentRepository> { DocumentRepositoryImpl(get(), get()) }
     single <ProfileCabinetRepository> { ProfileCabinetRepositoryImpl(get(), get()) }
     single <CreateCommentRepository> { CreateCommentRepositoryImpl(get()) }
-    single <SearchRepository> { SearchRepositoryImpl(get()) }
+    single <SearchRepository> { SearchRepositoryImpl(get(), get()) }
 }
 val dbModule = module {
     single { Room.databaseBuilder(get(), FakerAppDataBase::class.java,"fakerName")
