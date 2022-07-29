@@ -29,19 +29,18 @@ class DetailsViewModel(
     val progress = MutableLiveData(false)
 
 
-    @OptIn(ExperimentalPagingApi::class)
-    fun doc(query: String, countryId: Int): Flow<PagingData<SearchModel>> {
-        val pagingSourceFactory =
-            { database.getFakerDao().getSearchPaging("id=$countryId&query=$query") }
-
-        return Pager(
-            config = PagingConfig(pageSize = 50, enablePlaceholders = false),
-            remoteMediator = SearchSource(
-                query, database, networkService, countryId
-            ),
-            pagingSourceFactory = pagingSourceFactory
-        ).flow
-    }
+//    @OptIn(ExperimentalPagingApi::class)
+//    fun doc(query: String, countryId: Int): Flow<PagingData<SearchModel>> {
+//        val pagingSourceFactory =
+//            { database.getFakerDao().getSearchPaging("id=$countryId&query=$query") }
+//        return Pager(
+//            config = PagingConfig(pageSize = 50, enablePlaceholders = false),
+//            remoteMediator = SearchSource(
+//                query, database, networkService, countryId
+//            ),
+//            pagingSourceFactory = pagingSourceFactory
+//        ).flow
+//    }
 
     fun search(text: String, id: Int?) {
         viewModelScope.launch(Dispatchers.IO) {

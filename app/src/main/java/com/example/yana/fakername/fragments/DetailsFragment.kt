@@ -52,7 +52,7 @@ class DetailsFragment() : Fragment(), DocumentListener {
                 LinearLayoutManager.VERTICAL
             )
         )
-        binding.recyclerList.adapter = adapter
+        binding.recyclerList.adapter = adapterList
 
         binding.btnSaveEditCom.setSafeOnClickListener {
             if (isInnValid()) {
@@ -69,9 +69,9 @@ class DetailsFragment() : Fragment(), DocumentListener {
             })
         }
 
-        lifecycleScope.launch {
-            viewModel.doc(args.query, args.countryId).collect { adapter.submitData(it) }
-        }
+//        lifecycleScope.launch {
+//            viewModel.doc(args.query, args.countryId).collect { adapterList.submitData(it) }
+//        }
 
         viewModel.search(args.query, args.countryId)
         viewModel.saveDoc.observe(viewLifecycleOwner, {
