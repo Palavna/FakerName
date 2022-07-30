@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.yana.fakername.R
 import com.example.yana.fakername.databinding.FragmentRegisterNameBinding
 import com.example.yana.fakername.fragmentsViewModel.RegisterNameViewModel
 import com.example.yana.fakername.ui.MainActivity
@@ -32,10 +33,10 @@ class RegisterNameFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
-        viewModel.eventAuth.observe(viewLifecycleOwner, {
-            if (it)requireContext().cleanLaunchActivity<SelectScreenActivity>()
+        viewModel.eventAuth.observe(viewLifecycleOwner) {
+            if (it) requireContext().cleanLaunchActivity<SelectScreenActivity>()
             Toast.makeText(requireContext(), "dfdfgeewewew$it", Toast.LENGTH_SHORT).show()
-        })
+        }
     }
 
     private fun setupListeners() {
@@ -53,15 +54,15 @@ class RegisterNameFragment: Fragment() {
 
     fun isEmailValid(email: String, password: String): Boolean {
         if (email.isEmpty()) {
-            binding.etEmail.error = "email пустой"
+            binding.etEmail.error = getString(R.string.emailEmpty)
             return false
         }
         val isValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()
         if (!isValid){
-            binding.etEmail.error = "введите корректный email"
+            binding.etEmail.error = getString(R.string.enterEmailCorrect)
         }
         if (password.isEmpty()){
-            binding.etPasswordRepeat.error = "подтвердите пароль"
+            binding.etPasswordRepeat.error = getString(R.string.confirmPassword)
             return false
         }
         return isValid

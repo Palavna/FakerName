@@ -98,12 +98,12 @@ class DetailsFragment() : Fragment(), DocumentListener {
         var missiedFileds = mutableListOf<String>()
 
         if (binding.etAddTextEditCom.text.toString().length < 10) {
-            binding.etAddTextEditCom.error = "оставьте комментарий"
-            missiedFileds.add("оставьте комментарий")
+            binding.etAddTextEditCom.error = getString(R.string.leaveComment)
+            missiedFileds.add(getString(R.string.leaveComment))
             isValid = false
         }
         if (!binding.positive.isChecked && !binding.negative.isChecked) {
-            missiedFileds.add("radio button")
+            missiedFileds.add(getString(R.string.radioButton))
             isValid = false
         }
 

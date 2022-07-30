@@ -102,6 +102,7 @@
                         android:gravity="center_vertical"
                         android:layoutDirection="rtl"
                         android:paddingHorizontal="16dp"
+                        android:buttonTint="@color/white"
                         android:paddingStart="2dp"
                         android:text="@string/positive"
                         android:textColor="@color/white"
@@ -122,6 +123,7 @@
                         android:layoutDirection="rtl"
                         android:paddingHorizontal="20dp"
                         android:paddingStart="2dp"
+                        android:buttonTint="@color/white"
                         android:text="@string/negative"
                         android:textColor="@color/white"
                         android:textSize="16sp"
@@ -142,6 +144,7 @@
                     android:layout_marginBottom="18dp"
                     android:background="@drawable/bg_btn_send"
                     android:text="@string/send"
+                    android:textColor="@color/white"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/radios" />

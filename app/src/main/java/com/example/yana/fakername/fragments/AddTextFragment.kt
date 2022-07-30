@@ -35,18 +35,11 @@ class AddTextFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onCheckboxClicked()
         setupListeners()
-        viewModel.eventAuth.observe(viewLifecycleOwner, {
-            if (it)requireContext().cleanLaunchActivity<SelectScreenActivity>()
-        })
-    }
-
-    private fun onCheckboxClicked(){
-        if (binding.checkBox.isChecked){
-            binding.checkBox.isChecked = false
+        viewModel.eventAuth.observe(viewLifecycleOwner) {
+            if (it) requireContext().cleanLaunchActivity<SelectScreenActivity>()
         }
-       }
+    }
 
     private fun setupListeners() {
         binding.btnVhod.setSafeOnClickListener {
@@ -63,12 +56,12 @@ class AddTextFragment: Fragment() {
     }
         fun isEmailValid(email: String): Boolean {
             if (email.isEmpty()) {
-                binding.emailEt.error = "email пустой"
+                binding.emailEt.error = getString(R.string.emailEmpty)
                 return false
             }
             val isValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()
             if (!isValid){
-                binding.emailEt.error = "введите корректный email"
+                binding.emailEt.error = getString(R.string.enterEmailCorrect)
             }
             return isValid
         }

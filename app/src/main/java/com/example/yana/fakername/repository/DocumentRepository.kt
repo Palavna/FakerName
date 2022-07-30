@@ -18,7 +18,7 @@ interface DocumentRepository {
 ): CreateDocument?
 }
 
-class DocumentRepositoryImpl(private val iteractor: DocumentIteractor, private val fakerDao: FakerNameDao): DocumentRepository{
+class DocumentRepositoryImpl(private val iteractor: DocumentIteractor): DocumentRepository{
     override suspend fun documentsUser(id: Int): DocumentsUser? {
         return iteractor.documentsUser(id)
     }

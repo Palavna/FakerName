@@ -92,12 +92,12 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         var isValid = true
         var missiedFileds = mutableListOf<String>()
         if ((binding.spinner.selectedItem as? Countries)?.id == -1) {
-            missiedFileds.add("выберите страну")
+            missiedFileds.add(getString(R.string.enterCountry))
             isValid = false
         }
         if (binding.etFaker.text.toString().isEmpty()) {
-            binding.etFaker.error = "введите ПИН"
-            missiedFileds.add("введите ПИН")
+            binding.etFaker.error = getString(R.string.enterPin)
+            missiedFileds.add(getString(R.string.enterPin))
             isValid = false
         }
         if (!isValid) {

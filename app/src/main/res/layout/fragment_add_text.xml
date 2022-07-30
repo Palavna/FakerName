@@ -42,44 +42,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
-        android:inputType="textWebPassword"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="22dp"
+        android:inputType="textWebPassword"
         app:layout_constraintTop_toBottomOf="@id/password" />
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        app:layout_constraintEnd_toStartOf="@id/check"
-        app:layout_constraintTop_toBottomOf="@id/passwordEt" />
-
-    <TextView
-        android:id="@+id/check"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/zapomnit"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@id/passwordEt"
-        app:layout_constraintTop_toBottomOf="@id/passwordEt" />
 
     <TextView
         android:id="@+id/zabiliPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:clickable="true"
         android:focusable="true"
         android:text="@string/pass"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/check" />
+        app:layout_constraintTop_toBottomOf="@id/passwordEt" />
 
     <Button
         android:id="@+id/btnVhod"
@@ -88,7 +69,8 @@
         android:layout_marginStart="52dp"
         android:layout_marginTop="20dp"
         android:text="@string/voity"
-        app:layout_constraintStart_toEndOf="@id/check"
+        android:layout_marginEnd="94dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passwordEt" />
 
     <Button

@@ -42,6 +42,14 @@
     <string name="negat">Негативные :</string>
     <string name="forgotPasswordText">Забыли свой пароль? Без проблем. Просто сообщите нам свой адрес электроннной почты, и мы вышлем вам ссылку для сброса пароля, которая позволит вам выбрать новый.</string>
     <string name="resetLink">Ссылка для сброса пароля</string>
+    <string name="emailEmpty">email пустой</string>
+    <string name="enterEmailCorrect">введите корректный email</string>
+    <string name="enterCountry">выберите страну</string>
+    <string name="enterPin">введите ПИН</string>
+    <string name="leaveComment">оставьте комментарий</string>
+    <string name="radioButton">radio button</string>
+    <string name="notSpecified">не указано</string>
+    <string name="confirmPassword">подтвердите пароль</string>
 
     <plurals name="empty_field_msg">
         <item quantity="one">Пожалуйста, заполните обязательное поле:\u0020</item>

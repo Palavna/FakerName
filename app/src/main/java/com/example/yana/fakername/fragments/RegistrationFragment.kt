@@ -36,9 +36,9 @@ class RegistrationFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
-        viewModel.eventAuth.observe(viewLifecycleOwner, {
-            if (it)requireContext().cleanLaunchActivity<SelectScreenActivity>()
-        })
+        viewModel.eventAuth.observe(viewLifecycleOwner) {
+            if (it) requireContext().cleanLaunchActivity<SelectScreenActivity>()
+        }
     }
 
     private fun setupListeners() {
@@ -59,12 +59,12 @@ class RegistrationFragment: Fragment() {
     }
     fun isEmailValid(email: String): Boolean {
         if (email.isEmpty()) {
-            binding.emailEtReg.error = "email пустой"
+            binding.emailEtReg.error = getString(R.string.emailEmpty)
             return false
         }
         val isValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()
         if (!isValid){
-            binding.emailEtReg.error = "введите корректный email"
+            binding.emailEtReg.error = getString(R.string.enterEmailCorrect)
         }
         return isValid
     }

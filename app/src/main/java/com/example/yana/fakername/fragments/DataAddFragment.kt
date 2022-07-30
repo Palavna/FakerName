@@ -36,18 +36,22 @@ class DataAddFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.eventAuth.observe(viewLifecycleOwner, {
-            if (it)callBack?.openProfile()
-        })
+        viewModel.eventAuth.observe(viewLifecycleOwner) {
+            if (it) callBack?.openProfile()
+        }
 
-        viewModel.countries.observe(viewLifecycleOwner, {
-            val adapter = SpinnerAdapter(requireContext(), R.layout.item_spinner, it?.toTypedArray() ?: emptyArray())
+        viewModel.countries.observe(viewLifecycleOwner) {
+            val adapter = SpinnerAdapter(
+                requireContext(),
+                R.layout.item_spinner,
+                it?.toTypedArray() ?: emptyArray()
+            )
 
             binding.spinnerAdd.adapter = adapter
 
             setupListeners()
 
-        })
+        }
     }
 
     fun setupListeners(){
@@ -66,21 +70,21 @@ class DataAddFragment: Fragment() {
         var isValid = true
         var missiedFileds = mutableListOf<String>()
         if ((binding.spinnerAdd.selectedItem as? Countries)?.id == -1) {
-            missiedFileds.add("выберите страну")
+            missiedFileds.add(getString(R.string.enterCountry))
             isValid = false
         }
         if (binding.etAddData.text.toString().isEmpty())  {
-            binding.etAddData.error = "введите ПИН"
-            missiedFileds.add("введите ПИН")
+            binding.etAddData.error = getString(R.string.enterPin)
+            missiedFileds.add(getString(R.string.enterPin))
             isValid = false
         }
         if (binding.etAddText.text.toString().length<10) {
-            binding.etAddText.error = "оставьте комментарий"
-            missiedFileds.add("оставьте комментарий")
+            binding.etAddText.error = getString(R.string.leaveComment)
+            missiedFileds.add(getString(R.string.leaveComment))
             isValid = false
         }
         if (!binding.positive.isChecked && !binding.negative.isChecked){
-            missiedFileds.add("radio button")
+            missiedFileds.add(getString(R.string.radioButton))
             isValid = false
         }
         if (!isValid){
