@@ -41,7 +41,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
 
-        viewModel.countries.observe(viewLifecycleOwner, {
+        viewModel.countries.observe(viewLifecycleOwner) {
             val adapter = SpinnerAdapter(
                 requireContext(),
                 R.layout.item_spinner,
@@ -49,7 +49,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             )
 
             binding.spinner.adapter = adapter
-        })
+        }
         doSomething(binding.etFaker)
     }
 

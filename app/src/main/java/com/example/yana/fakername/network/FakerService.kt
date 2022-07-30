@@ -1,5 +1,6 @@
 package com.example.yana.fakername.network
 
+import androidx.paging.LoadType
 import com.example.yana.fakername.dataClass.*
 import retrofit2.Response
 import retrofit2.http.*
@@ -64,7 +65,7 @@ interface FakerService {
 
     @GET("documents/{id}")
     suspend fun documentsUser(
-        @Path("id") id: Int
+        @Path("id") id: Int,
     ): DocumentsUser?
 
     @GET("comments/{id}")

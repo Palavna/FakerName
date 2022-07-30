@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName
 @Entity
 data class CommentsUser (
 
+    val idDocument: Int,
     @PrimaryKey
     @SerializedName("id") val id: Int,
     @SerializedName("text") val text: String,

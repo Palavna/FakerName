@@ -31,6 +31,12 @@ interface FakerNameDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSearch(searchModel: List<SearchModel>? )
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertSearch(searchModel: Search?)
+
+    @Query("SELECT * FROM search WHERE `idUser`=:id")
+    fun getSearchQuery(id: String): Search?
+
 //    @Query("SELECT * FROM search WHERE idUser=:id")
 //    fun getSearch(id:String): SearchModel?
 
@@ -66,6 +72,12 @@ interface FakerNameDao {
 
     @Query("DELETE FROM documentsUser")
     fun deleteAllDocumentsUser()
+
+    @Query("SELECT * FROM commentsUser WHERE `idDocument`=:idComment")
+    fun getCommentUser(idComment:Int): PagingSource<Int, CommentsUser>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertCommentsUser(commentsUser: List<CommentsUser>?)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCommentsUser(commentsUser: CommentsUser)

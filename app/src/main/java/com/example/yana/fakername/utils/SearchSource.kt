@@ -2,27 +2,27 @@ package com.example.yana.fakername.utils
 
 import androidx.paging.*
 import androidx.room.withTransaction
-import com.example.yana.fakername.dataClass.SearchModel
+import com.example.yana.fakername.dataClass.CommentsUser
+import com.example.yana.fakername.dataClass.DocumentsUser
 import com.example.yana.fakername.db.FakerAppDataBase
-import com.example.yana.fakername.iteractor.SearchIteractor
 import com.example.yana.fakername.network.FakerService
 import retrofit2.HttpException
 import java.io.IOException
 
 @OptIn(ExperimentalPagingApi::class)
 class SearchSource(
-    private val query: String,
+//    private val query: String,
     private val database: FakerAppDataBase,
     private val networkService: FakerService,
     private val countryId: Int
 
-    ): RemoteMediator<Int, SearchModel>() {
+) : RemoteMediator<Int, CommentsUser>() {
     val userDao = database.getFakerDao()
 
 
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, SearchModel>
+        state: PagingState<Int, CommentsUser>
     ): MediatorResult {
 
         return try {
@@ -42,21 +42,20 @@ class SearchSource(
                 }
             }
 
-            val response = networkService.search(
-                query, loadKey, loadKey
+            val response = networkService.documentsUser(
+                countryId
             )
 
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    userDao.deleteAllSearch()
+                    userDao.deleteAllDocumentsUser()
                 }
-                val list = response?.data?.map {
-                    SearchModel(id = it.id, inn = it.inn, passport = it.passport, description = it.description,
-                    country_id = it.country_id, user_id = it.user_id, created_at = it.created_at, updated_at = it.updated_at,
-                    positiveCount = it.positiveCount, negativeCount = it.negativeCount, countries = it.countries,
-                    query = "id=$countryId&query=$query")
+                val list = response?.comments?.map {
+                    CommentsUser(id = it.id, text = it.text, is_positive = it.is_positive, parent_id = it.parent_id,
+                    document_id = it.document_id, user_id = it.user_id, created_at = it.created_at,
+                    updated_at = it.updated_at, user = it.user, idDocument = countryId)
                 }
-                userDao.insertSearch(list)
+                userDao.insertCommentsUser(list)
             }
 
             MediatorResult.Success(
@@ -68,9 +67,9 @@ class SearchSource(
             MediatorResult.Error(e)
         }
     }
-    }
+}
 
-    //    override fun getRefreshKey(state: PagingState<Int, SearchModel>): Int? {
+//    override fun getRefreshKey(state: PagingState<Int, SearchModel>): Int? {
 //        return null
 //    }
 //

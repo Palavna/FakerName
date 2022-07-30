@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity
-data class DocumentsUser (
+data class DocumentsUser(
 
     @PrimaryKey
     @SerializedName("id") val id: Int,
@@ -18,4 +18,4 @@ data class DocumentsUser (
     @SerializedName("updated_at") val updated_at: String,
     @SerializedName("comments") val comments: List<CommentsUser>?
 
-        )
+)

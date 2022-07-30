@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
+import com.example.yana.fakername.dataClass.CommentsUser
 import com.example.yana.fakername.dataClass.DocumentsUser
 import com.example.yana.fakername.dataClass.SearchModel
 import com.example.yana.fakername.db.FakerAppDataBase
@@ -29,18 +30,18 @@ class DetailsViewModel(
     val progress = MutableLiveData(false)
 
 
-//    @OptIn(ExperimentalPagingApi::class)
-//    fun doc(query: String, countryId: Int): Flow<PagingData<SearchModel>> {
-//        val pagingSourceFactory =
-//            { database.getFakerDao().getSearchPaging("id=$countryId&query=$query") }
-//        return Pager(
-//            config = PagingConfig(pageSize = 50, enablePlaceholders = false),
-//            remoteMediator = SearchSource(
-//                query, database, networkService, countryId
-//            ),
-//            pagingSourceFactory = pagingSourceFactory
-//        ).flow
-//    }
+    @OptIn(ExperimentalPagingApi::class)
+    fun doc( countryId: Int): Flow<PagingData<CommentsUser>> {
+        val pagingSourceFactory =
+            { database.getFakerDao().getCommentUser(countryId) }
+        return Pager(
+            config = PagingConfig(pageSize = 50, enablePlaceholders = false),
+            remoteMediator = SearchSource(
+                 database, networkService, countryId,
+            ),
+            pagingSourceFactory = pagingSourceFactory
+        ).flow
+    }
 
     fun search(text: String, id: Int?) {
         viewModelScope.launch(Dispatchers.IO) {

@@ -19,5 +19,5 @@ data class SearchModel(
     @SerializedName("updated_at") val updated_at: String?,
     @SerializedName("positiveCount") val positiveCount: Int?,
     @SerializedName("negativeCount") val negativeCount: Int?,
-    @SerializedName("countries") val countries: Countries?
+    @SerializedName("country") val countries: Countries?
 )

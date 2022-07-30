@@ -64,9 +64,9 @@ class DetailsFragment() : Fragment(), DocumentListener {
                 binding.etAddTextEditCom.setText("")
             }
 
-            viewModel.progress.observe(viewLifecycleOwner, {
+            viewModel.progress.observe(viewLifecycleOwner) {
                 binding.progress.isVisible = it
-            })
+            }
         }
 
 //        lifecycleScope.launch {
@@ -74,22 +74,22 @@ class DetailsFragment() : Fragment(), DocumentListener {
 //        }
 
         viewModel.search(args.query, args.countryId)
-        viewModel.saveDoc.observe(viewLifecycleOwner, {
+        viewModel.saveDoc.observe(viewLifecycleOwner
+        ) {
             adapterList.update(it?.comments ?: emptyList())
         }
-        )
 
-        viewModel.userDoc.observe(viewLifecycleOwner, {
+        viewModel.userDoc.observe(viewLifecycleOwner
+        ) {
             binding.telephoneNam.text = it?.inn
             binding.country.text = it?.countries?.name
             binding.description.text = it?.description.getTextIsNotEmpty()
             binding.positiveTv.text = it?.positiveCount.toString()
             binding.negativeTv.text = it?.negativeCount.toString()
-//            binding.groupTv.isVisible = it != null
-//            binding.tvEmptiMessege.isVisible = it == null
+            binding.groupTv.isVisible = it != null
+            binding.tvEmptiMessege.isVisible = it == null
 
         }
-        )
     }
 
     fun isInnValid(): Boolean {

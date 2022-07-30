@@ -14,4 +14,8 @@ data class Search (
     val total: Int?,
     val data: List<SearchModel>
 
-        )
+        ){
+    companion object {
+        fun getIdUser(countryId: Int?, query: String) = "id=$countryId&query=$query"
+    }
+}
