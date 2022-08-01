@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -17,9 +17,9 @@ import com.example.yana.fakername.adapters.DocumentListener
 import com.example.yana.fakername.adapters.SearchAdapter
 import com.example.yana.fakername.databinding.FragmentDetailsBinding
 import com.example.yana.fakername.fragmentsViewModel.DetailsViewModel
+import com.example.yana.fakername.ui.FragmentCallBack
 import com.example.yana.fakername.utils.getTextIsNotEmpty
 import com.example.yana.fakername.utils.setSafeOnClickListener
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsFragment() : Fragment(), DocumentListener {
@@ -30,6 +30,11 @@ class DetailsFragment() : Fragment(), DocumentListener {
     private val viewModel: DetailsViewModel by viewModel()
     private val adapter by lazy { SearchAdapter(this) }
     private val adapterList by lazy { CommentListAdapter(this) }
+    private val callBack = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            findNavController().navigate(R.id.action_detailsFragment2_to_mainFragment2)
+        }
+    }
 
 
     override fun onCreateView(
@@ -38,22 +43,51 @@ class DetailsFragment() : Fragment(), DocumentListener {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDetailsBinding.inflate(inflater, container, false)
+        requireActivity().onBackPressedDispatcher.addCallback(callBack)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupListeners()
+        viewModelObserve()
+
         binding.groupTv.isVisible = false
-
-
         binding.recyclerList.addItemDecoration(
             DividerItemDecoration(
                 requireContext(),
-                LinearLayoutManager.VERTICAL
-            )
-        )
+                LinearLayoutManager.VERTICAL))
         binding.recyclerList.adapter = adapterList
+    }
 
+
+    private fun viewModelObserve() {
+//        lifecycleScope.launch {
+//            viewModel.doc(args.query, args.countryId).collect { adapterList.submitData(it) }
+//        }
+
+        viewModel.search(args.query, args.countryId)
+        viewModel.saveDoc.observe(
+            viewLifecycleOwner
+        ) {
+            adapterList.update(it?.comments ?: emptyList())
+        }
+
+        viewModel.userDoc.observe(
+            viewLifecycleOwner
+        ) {
+            binding.telephoneNam.text = it?.inn
+            binding.country.text = it?.countries?.name
+            binding.description.text = it?.description.getTextIsNotEmpty()
+            binding.positiveTv.text = it?.positiveCount.toString()
+            binding.negativeTv.text = it?.negativeCount.toString()
+            binding.groupTv.isVisible = it != null
+            binding.tvEmptiMessege.isVisible = it == null
+
+        }
+    }
+
+    private fun setupListeners() {
         binding.btnSaveEditCom.setSafeOnClickListener {
             if (isInnValid()) {
                 viewModel.createDocument(
@@ -68,27 +102,8 @@ class DetailsFragment() : Fragment(), DocumentListener {
                 binding.progress.isVisible = it
             }
         }
-
-//        lifecycleScope.launch {
-//            viewModel.doc(args.query, args.countryId).collect { adapterList.submitData(it) }
-//        }
-
-        viewModel.search(args.query, args.countryId)
-        viewModel.saveDoc.observe(viewLifecycleOwner
-        ) {
-            adapterList.update(it?.comments ?: emptyList())
-        }
-
-        viewModel.userDoc.observe(viewLifecycleOwner
-        ) {
-            binding.telephoneNam.text = it?.inn
-            binding.country.text = it?.countries?.name
-            binding.description.text = it?.description.getTextIsNotEmpty()
-            binding.positiveTv.text = it?.positiveCount.toString()
-            binding.negativeTv.text = it?.negativeCount.toString()
-            binding.groupTv.isVisible = it != null
-            binding.tvEmptiMessege.isVisible = it == null
-
+        binding.imageBack.setSafeOnClickListener {
+            callBack
         }
     }
 

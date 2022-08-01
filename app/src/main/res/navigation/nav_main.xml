@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_detailsFragment2_to_editCommentFragment2"
             app:destination="@id/editCommentFragment2" />
+        <action
+            android:id="@+id/action_detailsFragment2_to_mainFragment2"
+            app:destination="@id/mainFragment2" />
     </fragment>
     <fragment
         android:id="@+id/editCommentFragment2"

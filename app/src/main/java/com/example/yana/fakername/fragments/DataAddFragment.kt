@@ -1,5 +1,6 @@
 package com.example.yana.fakername.fragments
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,7 +20,7 @@ import com.example.yana.fakername.utils.cleanLaunchActivity
 import com.example.yana.fakername.utils.setSafeOnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DataAddFragment: Fragment() {
+class DataAddFragment : Fragment() {
 
     private lateinit var binding: FragmentDataAddBinding
     private val viewModel: DataAddViewModel by viewModel()
@@ -39,31 +40,37 @@ class DataAddFragment: Fragment() {
         viewModel.eventAuth.observe(viewLifecycleOwner) {
             if (it) callBack?.openProfile()
         }
-
         viewModel.countries.observe(viewLifecycleOwner) {
             val adapter = SpinnerAdapter(
                 requireContext(),
                 R.layout.item_spinner,
                 it?.toTypedArray() ?: emptyArray()
             )
-
             binding.spinnerAdd.adapter = adapter
-
             setupListeners()
 
         }
     }
 
-    fun setupListeners(){
+    fun setupListeners() {
         binding.btnSend.setSafeOnClickListener {
-            if (isInnValid()){
+            if (isInnValid()) {
                 viewModel.createDocument(
                     (binding.spinnerAdd.selectedItem as Countries).id,
                     binding.etAddData.text.toString(),
                     binding.etAddText.text.toString(),
-                    binding.positive.isChecked)
+                    binding.positive.isChecked
+                )
             }
+            alertDialog()
         }
+    }
+
+    private fun alertDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Важно")
+        builder.setMessage("После отправки комментария вы будете перенаправлены в профиль")
+        builder.show()
     }
 
     fun isInnValid(): Boolean {
@@ -73,21 +80,21 @@ class DataAddFragment: Fragment() {
             missiedFileds.add(getString(R.string.enterCountry))
             isValid = false
         }
-        if (binding.etAddData.text.toString().isEmpty())  {
+        if (binding.etAddData.text.toString().isEmpty()) {
             binding.etAddData.error = getString(R.string.enterPin)
             missiedFileds.add(getString(R.string.enterPin))
             isValid = false
         }
-        if (binding.etAddText.text.toString().length<10) {
+        if (binding.etAddText.text.toString().length < 10) {
             binding.etAddText.error = getString(R.string.leaveComment)
             missiedFileds.add(getString(R.string.leaveComment))
             isValid = false
         }
-        if (!binding.positive.isChecked && !binding.negative.isChecked){
+        if (!binding.positive.isChecked && !binding.negative.isChecked) {
             missiedFileds.add(getString(R.string.radioButton))
             isValid = false
         }
-        if (!isValid){
+        if (!isValid) {
             val text = resources.getQuantityString(R.plurals.empty_field_msg, missiedFileds.size)
                 .plus(missiedFileds.joinToString(separator = ", "))
             Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()
