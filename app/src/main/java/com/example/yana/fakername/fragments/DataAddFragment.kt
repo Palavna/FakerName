@@ -69,7 +69,7 @@ class DataAddFragment : Fragment() {
     private fun alertDialog() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Важно")
-        builder.setMessage("После отправки комментария вы будете перенаправлены в профиль")
+        builder.setMessage("Ваш комментарий успешно добавлен, вы будете перенаправлены в профиль")
         builder.show()
     }
 

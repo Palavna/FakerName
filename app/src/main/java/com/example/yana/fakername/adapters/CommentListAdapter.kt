@@ -45,8 +45,12 @@ class CommentListAdapterVH(val binding: ItemListRecyclerBinding, private val lis
 
             binding.btnEdit.isInvisible = commentUser.user_id != SharedPreferenceFaker.id
 
+            binding.delete.isInvisible = commentUser.user_id != SharedPreferenceFaker.id
+
             binding.btnEdit.setOnClickListener {
                 listener.editDocument(commentUser.id)
+            }
+            binding.delete.setOnClickListener {
             }
         }
 }

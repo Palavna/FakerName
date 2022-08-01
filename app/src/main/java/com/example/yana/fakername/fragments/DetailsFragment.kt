@@ -30,11 +30,6 @@ class DetailsFragment() : Fragment(), DocumentListener {
     private val viewModel: DetailsViewModel by viewModel()
     private val adapter by lazy { SearchAdapter(this) }
     private val adapterList by lazy { CommentListAdapter(this) }
-    private val callBack = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {
-            findNavController().navigate(R.id.action_detailsFragment2_to_mainFragment2)
-        }
-    }
 
 
     override fun onCreateView(
@@ -43,7 +38,6 @@ class DetailsFragment() : Fragment(), DocumentListener {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDetailsBinding.inflate(inflater, container, false)
-        requireActivity().onBackPressedDispatcher.addCallback(callBack)
         return binding.root
     }
 
@@ -102,8 +96,8 @@ class DetailsFragment() : Fragment(), DocumentListener {
                 binding.progress.isVisible = it
             }
         }
-        binding.imageBack.setSafeOnClickListener {
-            callBack
+        binding.toolbarInfo.setNavigationOnClickListener {
+            findNavController().popBackStack()
         }
     }
 
