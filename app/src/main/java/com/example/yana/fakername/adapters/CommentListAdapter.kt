@@ -51,6 +51,7 @@ class CommentListAdapterVH(val binding: ItemListRecyclerBinding, private val lis
                 listener.editDocument(commentUser.id)
             }
             binding.delete.setOnClickListener {
+
             }
         }
 }

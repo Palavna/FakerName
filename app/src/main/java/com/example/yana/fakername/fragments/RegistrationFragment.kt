@@ -50,7 +50,7 @@ class RegistrationFragment: Fragment() {
             }
         }
         binding.btnRegistrationReg.setSafeOnClickListener {
-            findNavController().navigate(R.id.toRegistrationFragment)
+            findNavController().navigate(R.id.toRegistrationFragment2)
         }
 
         binding.forgotPass.setSafeOnClickListener{

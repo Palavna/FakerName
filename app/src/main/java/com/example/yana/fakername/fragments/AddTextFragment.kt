@@ -19,7 +19,7 @@ import com.example.yana.fakername.utils.cleanLaunchActivity
 import com.example.yana.fakername.utils.setSafeOnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AddTextFragment: Fragment() {
+class AddTextFragment : Fragment() {
 
     private lateinit var binding: FragmentAddTextBinding
     private val viewModel: AddTextViewModel by viewModel()
@@ -50,19 +50,21 @@ class AddTextFragment: Fragment() {
                 )
             }
         }
-        binding.zabiliPass.setSafeOnClickListener{
+
+        binding.zabiliPass.setSafeOnClickListener {
             findNavController().navigate(R.id.toForgotPasswordFragment3)
         }
     }
-        fun isEmailValid(email: String): Boolean {
-            if (email.isEmpty()) {
-                binding.emailEt.error = getString(R.string.emailEmpty)
-                return false
-            }
-            val isValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()
-            if (!isValid){
-                binding.emailEt.error = getString(R.string.enterEmailCorrect)
-            }
-            return isValid
+
+    fun isEmailValid(email: String): Boolean {
+        if (email.isEmpty()) {
+            binding.emailEt.error = getString(R.string.emailEmpty)
+            return false
         }
+        val isValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        if (!isValid) {
+            binding.emailEt.error = getString(R.string.enterEmailCorrect)
+        }
+        return isValid
+    }
 }
