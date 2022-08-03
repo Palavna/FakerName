@@ -10,6 +10,7 @@ interface CreateCommentIteractor {
 
     suspend fun createComment(): CreateComment?
     suspend fun showComment(id: Int): ShowComment?
+    suspend fun deleteComment(id: Int?): Void?
 }
 
 
@@ -20,6 +21,10 @@ class CreateCommentIteractorImpl(private val network: FakerService): CreateComme
 
     override suspend fun showComment(id: Int): ShowComment? {
         return network.showComment(id)
+    }
+
+    override suspend fun deleteComment(id: Int?): Void? {
+        return network.deleteComment(id)
     }
 
 }

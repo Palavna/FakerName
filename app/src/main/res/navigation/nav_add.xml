@@ -24,5 +24,13 @@
         android:id="@+id/forgotPasswordFragment2"
         android:name="com.example.yana.fakername.fragments.ForgotPasswordFragment"
         android:label="ForgotPasswordFragment" />
+    <fragment
+        android:id="@+id/addTextFragment3"
+        android:name="com.example.yana.fakername.fragments.AddTextFragment"
+        android:label="AddTextFragment" >
+        <action
+            android:id="@+id/action_addTextFragment3_to_registerNameFragment2"
+            app:destination="@id/registerNameFragment2" />
+    </fragment>
 
 </navigation>

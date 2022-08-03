@@ -64,7 +64,7 @@ class DetailsFragment() : Fragment(), DocumentListener {
         viewModel.saveDoc.observe(
             viewLifecycleOwner
         ) {
-            adapterList.update(it?.comments ?: emptyList())
+            adapterList.submitList(it?.comments ?: emptyList())
         }
 
         viewModel.userDoc.observe(
@@ -121,5 +121,9 @@ class DetailsFragment() : Fragment(), DocumentListener {
 
     override fun editDocument(id: Int) {
         findNavController().navigate(R.id.action_detailsFragment2_to_editCommentFragment2)
+    }
+
+    override fun deleteDocument(position: Int) {
+        viewModel.deleteDocument(position)
     }
 }

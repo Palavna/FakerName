@@ -75,4 +75,8 @@ class PrivateCabinetFragment: Fragment(), CastomViewCallback, DocumentListener {
     override fun editDocument(id: Int) {
 //        (requireActivity() as MainActivity).changeFragment(EditCommentFragment(id), true)
     }
+
+    override fun deleteDocument(position: Int) {
+
+    }
 }

@@ -46,4 +46,8 @@ class AboutFragment: Fragment(), DocumentListener {
 //        (requireActivity() as MainActivity).changeFragment(EditCommentFragment(id), true)
     }
 
+    override fun deleteDocument(position: Int) {
+        TODO("Not yet implemented")
+    }
+
 }

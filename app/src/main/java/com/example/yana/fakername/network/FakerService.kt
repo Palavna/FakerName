@@ -47,6 +47,11 @@ interface FakerService {
         @Field("text") text: String
     ): CreateComment?
 
+    @DELETE("comments/{id}")
+    suspend fun deleteComment(
+        @Path("id") id: Int?
+    ): Void?
+
     @FormUrlEncoded
     @POST("documents")
     suspend fun createDocument(

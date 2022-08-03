@@ -7,6 +7,7 @@ import com.example.yana.fakername.iteractor.CreateCommentIteractor
 interface CreateCommentRepository {
     suspend fun createComment(): CreateComment?
     suspend fun showComment(id: Int): ShowComment?
+    suspend fun deleteComment(id: Int?): Void?
 }
 
 
@@ -17,6 +18,10 @@ class CreateCommentRepositoryImpl(private val iteractor: CreateCommentIteractor)
 
     override suspend fun showComment(id: Int): ShowComment? {
         return iteractor.showComment(id)
+    }
+
+    override suspend fun deleteComment(id: Int?): Void? {
+        return iteractor.deleteComment(id)
     }
 
 }

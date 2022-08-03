@@ -3,6 +3,8 @@ package com.example.yana.fakername.fragments
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +40,10 @@ class DataAddFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.eventAuth.observe(viewLifecycleOwner) {
-            if (it) callBack?.openProfile()
+            if (it){
+                callBack?.openProfile()
+                alertDialog()
+            }
         }
         viewModel.countries.observe(viewLifecycleOwner) {
             val adapter = SpinnerAdapter(
@@ -62,7 +67,6 @@ class DataAddFragment : Fragment() {
                     binding.positive.isChecked
                 )
             }
-            alertDialog()
         }
     }
 
@@ -70,7 +74,10 @@ class DataAddFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Важно")
         builder.setMessage("Ваш комментарий успешно добавлен, вы будете перенаправлены в профиль")
-        builder.show()
+        val dialog = builder.show()
+        Handler(Looper.getMainLooper()).postDelayed({
+            dialog.dismiss()
+        }, 2000)
     }
 
     fun isInnValid(): Boolean {

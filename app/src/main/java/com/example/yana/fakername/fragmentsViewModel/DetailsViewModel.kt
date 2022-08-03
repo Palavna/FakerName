@@ -10,6 +10,7 @@ import com.example.yana.fakername.dataClass.DocumentsUser
 import com.example.yana.fakername.dataClass.SearchModel
 import com.example.yana.fakername.db.FakerAppDataBase
 import com.example.yana.fakername.network.FakerService
+import com.example.yana.fakername.repository.CreateCommentRepository
 import com.example.yana.fakername.repository.DocumentRepository
 import com.example.yana.fakername.repository.SearchRepository
 import com.example.yana.fakername.utils.SearchSource
@@ -21,13 +22,14 @@ import kotlinx.coroutines.launch
 class DetailsViewModel(
     private val repos: SearchRepository, private val reposUser: DocumentRepository,
     private val reposDoc: DocumentRepository, private val database: FakerAppDataBase,
-    private val networkService: FakerService
+    private val networkService: FakerService, private val createRepos: CreateCommentRepository
 ) : ViewModel() {
 
     val eventAuth = SingleLiveEvent<Boolean>()
     val saveDoc = MutableLiveData<DocumentsUser?>()
     val userDoc = MutableLiveData<SearchModel?>()
     val progress = MutableLiveData(false)
+    var user: SearchModel? = null
 
 
     @OptIn(ExperimentalPagingApi::class)
@@ -48,10 +50,10 @@ class DetailsViewModel(
             kotlin.runCatching {
                 progress.postValue(true)
                 val searchUser = repos.search(text, 0, id)
-                val user = searchUser?.data?.firstOrNull()
+                user = searchUser?.data?.firstOrNull()
                 progress.postValue(true)
                 if (user?.id != null) {
-                    val result = reposUser.documentsUser(user.id)
+                    val result = reposUser.documentsUser(user!!.id)
                     saveDoc.postValue(result)
                     progress.postValue(false)
                 } else {
@@ -75,6 +77,22 @@ class DetailsViewModel(
                 progress.postValue(true)
                 search(passport, countryId)
                 progress.postValue(false)
+                Log.d("dfghdfgh", "fghjfghjfg")
+            }.onFailure {
+                Log.d("dfghdfgh", "fghjfghjfg")
+            }
+        }
+    }
+    fun deleteDocument(position: Int){
+        viewModelScope.launch {
+            kotlin.runCatching {
+                progress.postValue(true)
+                val deleteCom = saveDoc.value?.comments?.get(position)?.id
+                val result = createRepos.deleteComment(deleteCom)
+                val newResult = reposUser.documentsUser(user!!.id)
+                saveDoc.postValue(newResult)
+                eventAuth.postValue(result != null)
+                progress.postValue(true)
                 Log.d("dfghdfgh", "fghjfghjfg")
             }.onFailure {
                 Log.d("dfghdfgh", "fghjfghjfg")

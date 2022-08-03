@@ -37,7 +37,7 @@ val viewModelModule = module {
     viewModel { AddTextViewModel(get(), get()) }
     viewModel { RegisterNameViewModel(get(), get()) }
     viewModel { AboutViewModel(get(), get()) }
-    viewModel { DetailsViewModel(get(), get(), get(), get(), get()) }
+    viewModel { DetailsViewModel(get(), get(), get(), get(), get(),get()) }
 
 }
 val iteractorModules = module {
