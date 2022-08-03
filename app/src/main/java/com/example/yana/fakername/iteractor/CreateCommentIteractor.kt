@@ -5,12 +5,13 @@ import com.example.yana.fakername.dataClass.ShowComment
 import com.example.yana.fakername.network.FakerService
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Response
 
 interface CreateCommentIteractor {
 
     suspend fun createComment(): CreateComment?
     suspend fun showComment(id: Int): ShowComment?
-    suspend fun deleteComment(id: Int?): Void?
+    suspend fun deleteComment(id: Int?): Response<Boolean>
 }
 
 
@@ -23,7 +24,7 @@ class CreateCommentIteractorImpl(private val network: FakerService): CreateComme
         return network.showComment(id)
     }
 
-    override suspend fun deleteComment(id: Int?): Void? {
+    override suspend fun deleteComment(id: Int?): Response<Boolean>{
         return network.deleteComment(id)
     }
 

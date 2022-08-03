@@ -23,6 +23,7 @@ class MainViewModel(val repository: FakerRepository, val repos: SearchRepository
 
     val countries = MutableLiveData <List<Countries>?>()
     val eventAuth = SingleLiveEvent<Boolean>()
+    val countryPos = MutableLiveData<Int?>()
 
     fun loadCountriesId() {
         viewModelScope.launch {

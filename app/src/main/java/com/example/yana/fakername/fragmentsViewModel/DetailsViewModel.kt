@@ -89,11 +89,13 @@ class DetailsViewModel(
                 progress.postValue(true)
                 val deleteCom = saveDoc.value?.comments?.get(position)?.id
                 val result = createRepos.deleteComment(deleteCom)
-                val newResult = reposUser.documentsUser(user!!.id)
-                saveDoc.postValue(newResult)
-                eventAuth.postValue(result != null)
-                progress.postValue(true)
-                Log.d("dfghdfgh", "fghjfghjfg")
+                if(true){
+                    val newResult = reposUser.documentsUser(user!!.id)
+                    saveDoc.postValue(newResult)
+                    progress.postValue(false)
+                }else{
+                    Log.d("dfghdfgh", "fghjfghjfg")
+                }
             }.onFailure {
                 Log.d("dfghdfgh", "fghjfghjfg")
             }

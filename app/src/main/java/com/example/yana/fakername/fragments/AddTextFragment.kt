@@ -51,7 +51,7 @@ class AddTextFragment : Fragment() {
             }
         }
         binding.btnRegistration.setSafeOnClickListener {
-            findNavController().navigate(R.id.toRegistrationFragment2)
+            findNavController().navigate(R.id.fromLoginToRegistration)
         }
 
         binding.zabiliPass.setSafeOnClickListener {

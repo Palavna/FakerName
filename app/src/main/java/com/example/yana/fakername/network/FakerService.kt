@@ -50,7 +50,7 @@ interface FakerService {
     @DELETE("comments/{id}")
     suspend fun deleteComment(
         @Path("id") id: Int?
-    ): Void?
+    ): Response<Boolean>
 
     @FormUrlEncoded
     @POST("documents")

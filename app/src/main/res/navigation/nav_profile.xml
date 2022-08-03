@@ -9,7 +9,7 @@
         android:name="com.example.yana.fakername.fragments.RegistrationFragment"
         android:label="RegistrationFragment" >
         <action
-            android:id="@+id/action_registrationFragment2_to_registerNameFragment5"
+            android:id="@+id/fromLoginToRegistration"
             app:destination="@id/registerNameFragment5" />
     </fragment>
     <fragment

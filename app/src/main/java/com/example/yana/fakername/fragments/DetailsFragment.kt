@@ -65,6 +65,7 @@ class DetailsFragment() : Fragment(), DocumentListener {
             viewLifecycleOwner
         ) {
             adapterList.submitList(it?.comments ?: emptyList())
+            adapterList.notifyDataSetChanged()
         }
 
         viewModel.userDoc.observe(

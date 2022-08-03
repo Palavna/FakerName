@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -50,7 +51,21 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
             binding.spinner.adapter = adapter
         }
+        binding.spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+                viewModel.countryPos.postValue(position)
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+        }
+
         doSomething(binding.etFaker)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.countryPos.value?.let { binding.spinner.setSelection(it) }
     }
 
 

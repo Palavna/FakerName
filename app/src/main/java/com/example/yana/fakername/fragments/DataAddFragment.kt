@@ -8,6 +8,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -55,6 +56,15 @@ class DataAddFragment : Fragment() {
             setupListeners()
 
         }
+
+        binding.spinnerAdd.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+                viewModel.countryPos.postValue(position)
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+        }
     }
 
     fun setupListeners() {
@@ -68,6 +78,11 @@ class DataAddFragment : Fragment() {
                 )
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.countryPos.value?.let { binding.spinnerAdd.setSelection(it) }
     }
 
     private fun alertDialog() {

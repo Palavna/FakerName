@@ -19,6 +19,7 @@ class DataAddViewModel(val repository: FakerRepository, val reposCom: CreateComm
 
     val countries = MutableLiveData <List<Countries>?>()
     val eventAuth = SingleLiveEvent<Boolean>()
+    val countryPos = MutableLiveData<Int?>()
 
     fun loadCountriesId(){
         viewModelScope.launch {
