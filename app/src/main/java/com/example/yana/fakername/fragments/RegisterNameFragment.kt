@@ -35,7 +35,7 @@ class RegisterNameFragment: Fragment() {
         setupListeners()
         viewModel.eventAuth.observe(viewLifecycleOwner) {
             if (it) requireContext().cleanLaunchActivity<SelectScreenActivity>()
-            Toast.makeText(requireContext(), "dfdfgeewewew$it", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Вы успешно зарегистрированы.", Toast.LENGTH_SHORT).show()
         }
     }
 
